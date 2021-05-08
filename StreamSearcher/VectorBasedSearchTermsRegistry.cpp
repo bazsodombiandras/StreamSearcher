@@ -1,6 +1,12 @@
 #include "VectorBasedSearchTermsRegistry.h"
 
-using namespace SearchTermsHandling;
+using namespace SearchTerms;
+using namespace std;
+
+VectorBasedSearchTermsRegistry::VectorBasedSearchTermsRegistry(const ISearchTermsRegistry& other)
+{
+	*this = other;
+}
 
 size_t VectorBasedSearchTermsRegistry::GetCount() const
 {
@@ -21,6 +27,18 @@ void VectorBasedSearchTermsRegistry::Add(string searchTerm)
 	{
 		this->searchTerms.push_back(searchTerm);
 	}
+}
+
+void VectorBasedSearchTermsRegistry::Remove(size_t idx)
+{
+	this->searchTerms.erase(begin(this->searchTerms) + idx);
+}
+
+VectorBasedSearchTermsRegistry& VectorBasedSearchTermsRegistry::operator= (const ISearchTermsRegistry& other)
+{
+	ISearchTermsRegistry::CopyFrom(other);
+
+	return *this;
 }
 
 const string& VectorBasedSearchTermsRegistry::operator[] (size_t idx) const

@@ -7,7 +7,7 @@
 
 using namespace std;
 
-namespace SearchTermsHandling
+namespace SearchTerms
 {
 	class VectorBasedSearchTermsRegistry : public ISearchTermsRegistry
 	{
@@ -15,12 +15,23 @@ namespace SearchTermsHandling
 		vector<string> searchTerms;
 
 	public:
-		size_t GetCount() const;
+		VectorBasedSearchTermsRegistry() = default;
+		VectorBasedSearchTermsRegistry(const ISearchTermsRegistry& other);
+		VectorBasedSearchTermsRegistry(const VectorBasedSearchTermsRegistry& other) = default;
+		VectorBasedSearchTermsRegistry(VectorBasedSearchTermsRegistry&& other) = default;
+		virtual ~VectorBasedSearchTermsRegistry() = default;
 
-		void Clear();
-		void Add(string searchTerm);
+		virtual size_t GetCount() const;
 
-		const string& operator[] (size_t idx) const;
+		virtual void Clear();
+		virtual void Add(string searchTerm);
+		virtual void Remove(size_t idx);
+
+		VectorBasedSearchTermsRegistry& operator= (const ISearchTermsRegistry& other);
+		VectorBasedSearchTermsRegistry& operator= (const VectorBasedSearchTermsRegistry& other) = default;
+		VectorBasedSearchTermsRegistry& operator= (VectorBasedSearchTermsRegistry&& other) = default;
+		
+		virtual const string& operator[] (size_t idx) const;
 	};
 }
 

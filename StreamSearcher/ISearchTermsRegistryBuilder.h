@@ -2,11 +2,11 @@
 
 #include "ISearchTermsRegistry.h"
 
-namespace SearchTermsHandling
+namespace SearchTerms
 {
 	class ISearchTermsRegistryBuilder
 	{
 	public:
-		virtual void Build(ISearchTermsRegistry& searchTermsRegistry) const = 0;
+		virtual void Build(ISearchTermsRegistry& searchTerms) const = 0;
 	};
 }

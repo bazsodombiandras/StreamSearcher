@@ -6,7 +6,7 @@
 
 using namespace std;
 
-namespace SearchTermsHandling
+namespace SearchTerms
 {
 	class SearchTermsRegistryBuilderFromFile : public ISearchTermsRegistryBuilder
 	{
@@ -15,7 +15,7 @@ namespace SearchTermsHandling
 
 		SearchTermsRegistryBuilderFromFile() = delete;
 		SearchTermsRegistryBuilderFromFile(const SearchTermsRegistryBuilderFromFile&) = delete;
-		SearchTermsRegistryBuilderFromFile(SearchTermsRegistryBuilderFromFile&&) = default;
+		SearchTermsRegistryBuilderFromFile(SearchTermsRegistryBuilderFromFile&&) = delete;
 
 		SearchTermsRegistryBuilderFromFile& operator= (const SearchTermsRegistryBuilderFromFile&) = delete;
 		SearchTermsRegistryBuilderFromFile& operator= (SearchTermsRegistryBuilderFromFile&&) = delete;
@@ -23,9 +23,9 @@ namespace SearchTermsHandling
 	public:
 		SearchTermsRegistryBuilderFromFile(const string& inputFile);
 
-		~SearchTermsRegistryBuilderFromFile() = default;
+		virtual ~SearchTermsRegistryBuilderFromFile() = default;
 
-		void Build(ISearchTermsRegistry& searchTermsRegistry) const;
+		virtual void Build(ISearchTermsRegistry& searchTerms) const;
 	};
 }
 

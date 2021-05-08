@@ -4,7 +4,7 @@
     <Filter Include="InputHandling">
       <UniqueIdentifier>{5aec0cb9-7831-4eba-aa8f-22eac4636161}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SearchTermsHandling">
+    <Filter Include="SearchTerms">
       <UniqueIdentifier>{90a8273d-ca1f-4d8a-8e60-5f528b398402}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -13,31 +13,36 @@
       <Filter>InputHandling</Filter>
     </ClCompile>
     <ClCompile Include="SearchTermsRegistryBuilderFromFile.cpp">
-      <Filter>SearchTermsHandling</Filter>
+      <Filter>SearchTerms</Filter>
     </ClCompile>
     <ClCompile Include="VectorBasedSearchTermsRegistry.cpp">
-      <Filter>SearchTermsHandling</Filter>
+      <Filter>SearchTerms</Filter>
     </ClCompile>
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="StreamSearcher.cpp" />
+    <ClCompile Include="ISearchTermsRegistry.cpp">
+      <Filter>SearchTerms</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ArgumentProcessor.h">
       <Filter>InputHandling</Filter>
     </ClInclude>
     <ClInclude Include="ISearchTermsRegistryBuilder.h">
-      <Filter>SearchTermsHandling</Filter>
+      <Filter>SearchTerms</Filter>
     </ClInclude>
     <ClInclude Include="ISearchTermsRegistry.h">
-      <Filter>SearchTermsHandling</Filter>
+      <Filter>SearchTerms</Filter>
     </ClInclude>
     <ClInclude Include="SearchTermsRegistryBuilderFromFile.h">
-      <Filter>SearchTermsHandling</Filter>
+      <Filter>SearchTerms</Filter>
     </ClInclude>
     <ClInclude Include="VectorBasedSearchTermsRegistry.h">
-      <Filter>SearchTermsHandling</Filter>
+      <Filter>SearchTerms</Filter>
     </ClInclude>
     <ClInclude Include="InputData.h">
       <Filter>InputHandling</Filter>
     </ClInclude>
+    <ClInclude Include="StreamSearcher.h" />
   </ItemGroup>
 </Project>
