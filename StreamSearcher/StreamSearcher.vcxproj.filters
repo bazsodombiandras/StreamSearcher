@@ -21,12 +21,30 @@
     <ClCompile Include="ArgumentProcessor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="VectorBasedSearchTermsRegistry.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SearchTermsRegistryBuilderFromFile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="InputData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ArgumentProcessor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VectorBasedSearchTermsRegistry.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ISearchTermsRegistry.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SearchTermsRegistryBuilderFromFile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ISearchTermsRegistryBuilder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

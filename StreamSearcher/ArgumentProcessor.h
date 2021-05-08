@@ -9,9 +9,9 @@ namespace InputDataHandling
 	class ArgumentProcessor
 	{
 	private:
-		static void DisplayUsage(const wstring& appName);
+		static void DisplayUsage(const string& appName);
 
 	public:
-		static InputData InterpretArguments(int argc, wchar_t* argv[]);
+		static InputData InterpretArguments(int argc, char* argv[]);
 	};
 }

@@ -1,31 +1,31 @@
+#include "ArgumentProcessor.h"
+
 #include <filesystem>
 #include <iostream>
 #include <stdexcept>
 #include <string>
 
-#include "ArgumentProcessor.h"
-
-using namespace std;
 using namespace InputDataHandling;
+using namespace std;
 
-void ArgumentProcessor::DisplayUsage(const wstring& appName)
+void ArgumentProcessor::DisplayUsage(const string& appName)
 {
-	wcout << "Usage:" << endl;
-	wcout << appName << " " << "DictionaryFile DataFile1 ... DataFileN" << endl;
-	wcout << endl;
+	cout << "Usage:" << endl;
+	cout << appName << " " << "SearchTermsFile DataFile1 ... DataFileN" << endl;
+	cout << endl;
 }
 
-InputData ArgumentProcessor::InterpretArguments(int argc, wchar_t* argv[])
+InputData ArgumentProcessor::InterpretArguments(int argc, char* argv[])
 {
 	if (argc < 3)
 	{
-		DisplayUsage(std::filesystem::path(argv[0]).filename());
-		throw std::invalid_argument("There should be at least 2 command line argument specified (one dictionary file and at least one data file).");
+		DisplayUsage(std::filesystem::path(argv[0]).filename().string());
+		throw std::invalid_argument("There should be at least 2 command line argument specified (one search terms file and at least one data file).");
 	}
 
 	return InputData
 	{
 		argv[1],
-		vector<wstring>(argv + 2, argv + argc),
+		vector<string>(argv + 2, argv + argc),
 	};
 }

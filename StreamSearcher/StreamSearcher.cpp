@@ -1,31 +1,45 @@
+#include "ArgumentProcessor.h"
+#include "SearchTermsRegistryBuilderFromFile.h"
+#include "VectorBasedSearchTermsRegistry.h"
+
 #include <iostream>
 
-#include "ArgumentProcessor.h"
-
-using namespace std;
 using namespace InputDataHandling;
+using namespace std;
 
-int wmain(int argc, wchar_t* argv[])
+int main(int argc, char* argv[])
 {
     try
     {
         InputData inputData = ArgumentProcessor::InterpretArguments(argc, argv);
 
-        wcout << inputData.dictionaryFile << endl;
-        for (const wstring& dataFile : inputData.dataFiles)
+        cout << "Search terms file: " << inputData.searchTermsFile << endl;
+        cout << "Data files:" << endl;
+        for (const string& dataFile : inputData.dataFiles)
         {
-            wcout << dataFile << " ";
+            cout << "  " << dataFile << endl;
         }
-        wcout << endl;
+        cout << endl;
+
+        VectorBasedSearchTermsRegistry searchTermsRegistry;
+        SearchTermsRegistryBuilderFromFile searchTermsRegistryBuilder(inputData.searchTermsFile);
+        searchTermsRegistryBuilder.Build(searchTermsRegistry);
+
+        cout << "Search terms:" << endl;
+        for (size_t searchTermIdx = 0; searchTermIdx < searchTermsRegistry.GetCount(); ++searchTermIdx)
+        {
+            cout << searchTermsRegistry[searchTermIdx] << endl;
+        }
+        cout << endl;
     }
     catch (exception ex)
     {
-        wcerr << "Error: " << ex.what() << endl;
+        cerr << "Error: " << ex.what() << endl;
         return 1;
     }
     catch (...)
     {
-        wcerr << "Error: Unexpected eception encountered." << endl;
+        cerr << "Error: Unexpected eception encountered." << endl;
         return 2;
     }
 

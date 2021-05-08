@@ -141,11 +141,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ArgumentProcessor.cpp" />
+    <ClCompile Include="SearchTermsRegistryBuilderFromFile.cpp" />
+    <ClCompile Include="VectorBasedSearchTermsRegistry.cpp" />
     <ClCompile Include="StreamSearcher.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ArgumentProcessor.h" />
+    <ClInclude Include="ISearchTermsRegistryBuilder.h" />
     <ClInclude Include="InputData.h" />
+    <ClInclude Include="ISearchTermsRegistry.h" />
+    <ClInclude Include="SearchTermsRegistryBuilderFromFile.h" />
+    <ClInclude Include="VectorBasedSearchTermsRegistry.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

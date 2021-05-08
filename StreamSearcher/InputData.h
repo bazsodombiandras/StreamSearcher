@@ -10,8 +10,8 @@ namespace InputDataHandling
 	class InputData
 	{
 	public:
-		wstring dictionaryFile;
-		vector<wstring> dataFiles;
+		string searchTermsFile;
+		vector<string> dataFiles;
 	};
 }
 
