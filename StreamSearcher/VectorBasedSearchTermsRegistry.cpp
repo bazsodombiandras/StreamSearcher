@@ -1,5 +1,7 @@
 #include "VectorBasedSearchTermsRegistry.h"
 
+using namespace SearchTermsHandling;
+
 size_t VectorBasedSearchTermsRegistry::GetCount() const
 {
 	return this->searchTerms.size();

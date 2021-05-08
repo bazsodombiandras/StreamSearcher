@@ -6,23 +6,26 @@
 
 using namespace std;
 
-class SearchTermsRegistryBuilderFromFile : public ISearchTermsRegistryBuilder
+namespace SearchTermsHandling
 {
-private:
-	const string inputFile;
+	class SearchTermsRegistryBuilderFromFile : public ISearchTermsRegistryBuilder
+	{
+	private:
+		const string inputFile;
 
-	SearchTermsRegistryBuilderFromFile() = delete;
-	SearchTermsRegistryBuilderFromFile(const SearchTermsRegistryBuilderFromFile&) = delete;
-	SearchTermsRegistryBuilderFromFile(SearchTermsRegistryBuilderFromFile&&) = default;
-	
-	SearchTermsRegistryBuilderFromFile& operator= (const SearchTermsRegistryBuilderFromFile&) = delete;
-	SearchTermsRegistryBuilderFromFile& operator= (SearchTermsRegistryBuilderFromFile&&) = delete;
+		SearchTermsRegistryBuilderFromFile() = delete;
+		SearchTermsRegistryBuilderFromFile(const SearchTermsRegistryBuilderFromFile&) = delete;
+		SearchTermsRegistryBuilderFromFile(SearchTermsRegistryBuilderFromFile&&) = default;
 
-public:
-	SearchTermsRegistryBuilderFromFile(const string& inputFile);
+		SearchTermsRegistryBuilderFromFile& operator= (const SearchTermsRegistryBuilderFromFile&) = delete;
+		SearchTermsRegistryBuilderFromFile& operator= (SearchTermsRegistryBuilderFromFile&&) = delete;
 
-	~SearchTermsRegistryBuilderFromFile() = default;
+	public:
+		SearchTermsRegistryBuilderFromFile(const string& inputFile);
 
-	void Build(ISearchTermsRegistry& searchTermsRegistry) const;
-};
+		~SearchTermsRegistryBuilderFromFile() = default;
+
+		void Build(ISearchTermsRegistry& searchTermsRegistry) const;
+	};
+}
 

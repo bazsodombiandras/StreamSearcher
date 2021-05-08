@@ -3,10 +3,11 @@
 #include <fstream>
 #include <iostream>
 
+using namespace SearchTermsHandling;
 using namespace std;
 
-SearchTermsRegistryBuilderFromFile::SearchTermsRegistryBuilderFromFile(const string& inputFile):
-	inputFile (inputFile)
+SearchTermsRegistryBuilderFromFile::SearchTermsRegistryBuilderFromFile(const string& inputFile) :
+	inputFile(inputFile)
 {
 }
 
