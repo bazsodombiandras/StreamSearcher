@@ -6,8 +6,6 @@
 using namespace StreamSearch;
 using namespace std;
 
-const size_t StreamSearcher::InputStreamBufferSize = 4096;
-
 vector<string> StreamSearcher::FindTermsInStream(const set<string>& searchTerms, istream& inputStream)
 {
 	vector<string> results;
@@ -15,28 +13,20 @@ vector<string> StreamSearcher::FindTermsInStream(const set<string>& searchTerms,
 	vector<SearchItem> searchItems;
 	transform(begin(searchTerms), end(searchTerms), back_inserter(searchItems), [](const string& searchTerm) { return SearchItem(searchTerm); });
 
-	char inputStreamBuffer[InputStreamBufferSize];
-	streamsize readCharCount = 0;
-	while ((readCharCount = inputStream.read(inputStreamBuffer, InputStreamBufferSize).gcount()) > 0)
+	for_each(istreambuf_iterator<char>(inputStream), istreambuf_iterator<char>(), [&searchItems, &results](char c)
 	{
-		for (streamsize charIdx = 0; charIdx < readCharCount; ++charIdx)
+		remove_if(begin(searchItems), end(searchItems), [c, &results](SearchItem& searchItem)
 		{
-			char c = inputStreamBuffer[charIdx];
-			for (auto itSearchItems = begin(searchItems); itSearchItems != end(searchItems);)
+			if (searchItem.IsFoundAfterCheckCharacter(c))
 			{
-				SearchItem& searchItem = *itSearchItems;
-				if (searchItem.IsFoundAfterCheckCharacter(c))
-				{
-					results.push_back(searchItem.GetSearchTerm());
-					itSearchItems = searchItems.erase(itSearchItems);
-				}
-				else
-				{
-					++itSearchItems;
-				}
+				results.push_back(searchItem.GetSearchTerm());
+
+				return true;
 			}
-		}
-	}
+
+			return false;
+		});
+	});
 
 	return results;
 }
