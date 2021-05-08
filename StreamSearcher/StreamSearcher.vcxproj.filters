@@ -7,42 +7,43 @@
     <Filter Include="SearchTerms">
       <UniqueIdentifier>{90a8273d-ca1f-4d8a-8e60-5f528b398402}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Search">
+      <UniqueIdentifier>{b6e3152f-b55a-4976-9bb2-1537e42b73d9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ArgumentProcessor.cpp">
       <Filter>InputHandling</Filter>
     </ClCompile>
-    <ClCompile Include="SearchTermsRegistryBuilderFromFile.cpp">
-      <Filter>SearchTerms</Filter>
-    </ClCompile>
-    <ClCompile Include="VectorBasedSearchTermsRegistry.cpp">
+    <ClCompile Include="SearchTermsBuilderFromFile.cpp">
       <Filter>SearchTerms</Filter>
     </ClCompile>
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="StreamSearcher.cpp" />
-    <ClCompile Include="ISearchTermsRegistry.cpp">
-      <Filter>SearchTerms</Filter>
+    <ClCompile Include="StreamSearcher.cpp">
+      <Filter>Search</Filter>
+    </ClCompile>
+    <ClCompile Include="SearchItem.cpp">
+      <Filter>Search</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ArgumentProcessor.h">
       <Filter>InputHandling</Filter>
     </ClInclude>
-    <ClInclude Include="ISearchTermsRegistryBuilder.h">
+    <ClInclude Include="ISearchTermsBuilder.h">
       <Filter>SearchTerms</Filter>
     </ClInclude>
-    <ClInclude Include="ISearchTermsRegistry.h">
-      <Filter>SearchTerms</Filter>
-    </ClInclude>
-    <ClInclude Include="SearchTermsRegistryBuilderFromFile.h">
-      <Filter>SearchTerms</Filter>
-    </ClInclude>
-    <ClInclude Include="VectorBasedSearchTermsRegistry.h">
+    <ClInclude Include="SearchTermsBuilderFromFile.h">
       <Filter>SearchTerms</Filter>
     </ClInclude>
     <ClInclude Include="InputData.h">
       <Filter>InputHandling</Filter>
     </ClInclude>
-    <ClInclude Include="StreamSearcher.h" />
+    <ClInclude Include="StreamSearcher.h">
+      <Filter>Search</Filter>
+    </ClInclude>
+    <ClInclude Include="SearchItem.h">
+      <Filter>Search</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

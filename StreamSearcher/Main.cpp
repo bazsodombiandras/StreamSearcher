@@ -1,8 +1,8 @@
 #include "ArgumentProcessor.h"
-#include "SearchTermsRegistryBuilderFromFile.h"
+#include "SearchTermsBuilderFromFile.h"
 #include "StreamSearcher.h"
-#include "VectorBasedSearchTermsRegistry.h"
 
+#include <chrono>
 #include <filesystem>
 #include <fstream>
 #include <iostream>
@@ -25,25 +25,23 @@ int main(int argc, char* argv[])
         copy(begin(inputData.dataFiles), end(inputData.dataFiles), ostream_iterator<string>(cout, "\n"));
         cout << endl;
 
-        VectorBasedSearchTermsRegistry searchTerms;
-        SearchTermsRegistryBuilderFromFile searchTermsRegistryBuilder(inputData.searchTermsFile);
+        set<string> searchTerms;
+        SearchTermsBuilderFromFile searchTermsRegistryBuilder(inputData.searchTermsFile);
         searchTermsRegistryBuilder.Build(searchTerms);
 
         cout << "Search terms:" << endl;
-        for (size_t searchTermIdx = 0; searchTermIdx < searchTerms.GetCount(); ++searchTermIdx)
-        {
-            cout << searchTerms[searchTermIdx] << endl;
-        }
+        copy(begin(searchTerms), end(searchTerms), ostream_iterator<string>(cout, "\n"));
         cout << endl;
 
-        cout << "------------------------------" << endl << endl << "Found search terms in data files:" << endl << endl;
+        cout << "------------------------------" << endl << endl;
+        cout << "Searching for terms in data files..." << endl << endl;
         for (string inputDataFile : inputData.dataFiles)
         {
             ifstream inputDataStream(inputDataFile);
             vector<string> foundSearchTerms = StreamSearcher::FindTermsInStream(searchTerms, inputDataStream);
             if (!foundSearchTerms.empty())
             {
-                cout << std::filesystem::path(inputDataFile).filename().string() << ": " << endl;
+                cout << filesystem::path(inputDataFile).filename().string() << ": " << endl;
                 copy(begin(foundSearchTerms), end(foundSearchTerms), ostream_iterator<string>(cout, "\n"));
                 cout << endl;
             }

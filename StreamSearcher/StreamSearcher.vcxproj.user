@@ -4,4 +4,8 @@
     <LocalDebuggerCommandArguments>C:/Temp/searchTerms.txt C:/Temp/data1.txt C:/Temp/data2.txt C:/Temp/data3.txt C:/Temp/data4.txt C:/Temp/data5.txt</LocalDebuggerCommandArguments>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LocalDebuggerCommandArguments>C:/Temp/searchTerms.txt C:/Temp/data1.txt C:/Temp/data2.txt C:/Temp/data3.txt C:/Temp/data4.txt C:/Temp/data5.txt</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
 </Project>

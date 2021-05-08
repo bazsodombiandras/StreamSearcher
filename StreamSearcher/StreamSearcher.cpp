@@ -1,19 +1,17 @@
 #include "StreamSearcher.h"
-#include "VectorBasedSearchTermsRegistry.h"
+#include "SearchItem.h"
 
 #include<algorithm>
 
-using namespace SearchTerms;
 using namespace StreamSearch;
 using namespace std;
 
-vector<string> StreamSearcher::FindTermsInStream(const ISearchTermsRegistry& searchTerms, istream& inputStream)
+vector<string> StreamSearcher::FindTermsInStream(const set<string>& searchTerms, istream& inputStream)
 {
 	vector<string> results;
 
-	vector<pair<string, size_t>> notFoundSearchTermsWithCurrentIndex;
-	size_t searchTermIdx = 0;
-	generate_n(back_inserter(notFoundSearchTermsWithCurrentIndex), searchTerms.GetCount(), [&searchTerms, &searchTermIdx]() { return make_pair(searchTerms[searchTermIdx++], 0); });
+	vector<SearchItem> searchItems;
+	transform(begin(searchTerms), end(searchTerms), back_inserter(searchItems), [](const string& searchTerm) { return SearchItem(searchTerm); });
 
 	const size_t readBufferLength = 4096;
 	char readBuffer[readBufferLength];
@@ -23,32 +21,17 @@ vector<string> StreamSearcher::FindTermsInStream(const ISearchTermsRegistry& sea
 		for (streamsize charIdx = 0; charIdx < charCount; ++charIdx)
 		{
 			char c = readBuffer[charIdx];
-			for (auto itNotFoundSearchTermWithCurrentIndex = begin(notFoundSearchTermsWithCurrentIndex); itNotFoundSearchTermWithCurrentIndex != end(notFoundSearchTermsWithCurrentIndex);)
+			for (auto itSearchItems = begin(searchItems); itSearchItems != end(searchItems);)
 			{
-				bool searchTermFound = false;
-
-				auto& notFoundSearchTermWithCurrentIndex = *itNotFoundSearchTermWithCurrentIndex;
-				if (notFoundSearchTermWithCurrentIndex.first[notFoundSearchTermWithCurrentIndex.second] == c)
+				SearchItem& searchItem = *itSearchItems;
+				if (searchItem.IsFoundAfterCheckCharacter(c))
 				{
-					++notFoundSearchTermWithCurrentIndex.second;
-					if (notFoundSearchTermWithCurrentIndex.second >= notFoundSearchTermWithCurrentIndex.first.length())
-					{
-						searchTermFound = true;
-					}
+					results.push_back(searchItem.GetSearchTerm());
+					itSearchItems = searchItems.erase(itSearchItems);
 				}
 				else
 				{
-					notFoundSearchTermWithCurrentIndex.second = 0;
-				}
-
-				if (searchTermFound)
-				{
-					results.push_back(notFoundSearchTermWithCurrentIndex.first);
-					itNotFoundSearchTermWithCurrentIndex = notFoundSearchTermsWithCurrentIndex.erase(itNotFoundSearchTermWithCurrentIndex);
-				}
-				else
-				{
-					++itNotFoundSearchTermWithCurrentIndex;
+					++itSearchItems;
 				}
 			}
 		}

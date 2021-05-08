@@ -131,6 +131,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -141,20 +142,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ArgumentProcessor.cpp" />
-    <ClCompile Include="ISearchTermsRegistry.cpp" />
-    <ClCompile Include="SearchTermsRegistryBuilderFromFile.cpp" />
+    <ClCompile Include="SearchItem.cpp" />
+    <ClCompile Include="SearchTermsBuilderFromFile.cpp" />
     <ClCompile Include="StreamSearcher.cpp" />
-    <ClCompile Include="VectorBasedSearchTermsRegistry.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ArgumentProcessor.h" />
-    <ClInclude Include="ISearchTermsRegistryBuilder.h" />
+    <ClInclude Include="ISearchTermsBuilder.h" />
     <ClInclude Include="InputData.h" />
-    <ClInclude Include="ISearchTermsRegistry.h" />
-    <ClInclude Include="SearchTermsRegistryBuilderFromFile.h" />
+    <ClInclude Include="SearchItem.h" />
+    <ClInclude Include="SearchTermsBuilderFromFile.h" />
     <ClInclude Include="StreamSearcher.h" />
-    <ClInclude Include="VectorBasedSearchTermsRegistry.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
