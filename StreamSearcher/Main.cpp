@@ -1,5 +1,5 @@
 #include "ArgumentProcessor.h"
-#include "SearchTermsBuilderFromFile.h"
+#include "SearchTermsBuilderFromStream.h"
 #include "StreamSearcher.h"
 
 #include <chrono>
@@ -26,7 +26,8 @@ int main(int argc, char* argv[])
         cout << endl;
 
         set<string> searchTerms;
-        SearchTermsBuilderFromFile searchTermsRegistryBuilder(inputData.searchTermsFile);
+        ifstream inputDataFileStream(inputData.searchTermsFile);
+        SearchTermsBuilderFromStream searchTermsRegistryBuilder(inputDataFileStream);
         searchTermsRegistryBuilder.Build(searchTerms);
 
         cout << "Search terms:" << endl;

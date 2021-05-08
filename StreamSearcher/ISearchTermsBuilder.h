@@ -10,6 +10,6 @@ namespace SearchTerms
 	class ISearchTermsBuilder
 	{
 	public:
-		virtual void Build(set<string>& searchTerms) const = 0;
+		virtual void Build(set<string>& searchTerms) = 0;
 	};
 }

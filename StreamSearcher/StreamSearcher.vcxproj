@@ -143,7 +143,7 @@
   <ItemGroup>
     <ClCompile Include="ArgumentProcessor.cpp" />
     <ClCompile Include="SearchItem.cpp" />
-    <ClCompile Include="SearchTermsBuilderFromFile.cpp" />
+    <ClCompile Include="SearchTermsBuilderFromStream.cpp" />
     <ClCompile Include="StreamSearcher.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
@@ -152,7 +152,7 @@
     <ClInclude Include="ISearchTermsBuilder.h" />
     <ClInclude Include="InputData.h" />
     <ClInclude Include="SearchItem.h" />
-    <ClInclude Include="SearchTermsBuilderFromFile.h" />
+    <ClInclude Include="SearchTermsBuilderFromStream.h" />
     <ClInclude Include="StreamSearcher.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

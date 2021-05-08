@@ -6,6 +6,8 @@
 using namespace StreamSearch;
 using namespace std;
 
+const size_t StreamSearcher::StreamBufferSize = 4096;
+
 vector<string> StreamSearcher::FindTermsInStream(const set<string>& searchTerms, istream& inputStream)
 {
 	vector<string> results;
@@ -13,9 +15,8 @@ vector<string> StreamSearcher::FindTermsInStream(const set<string>& searchTerms,
 	vector<SearchItem> searchItems;
 	transform(begin(searchTerms), end(searchTerms), back_inserter(searchItems), [](const string& searchTerm) { return SearchItem(searchTerm); });
 
-	const size_t readBufferLength = 4096;
-	char readBuffer[readBufferLength];
-	while (inputStream.read(readBuffer, readBufferLength).gcount() > 0)
+	char readBuffer[StreamBufferSize];
+	while (inputStream.read(readBuffer, StreamBufferSize).gcount() > 0)
 	{
 		streamsize charCount = inputStream.gcount();
 		for (streamsize charIdx = 0; charIdx < charCount; ++charIdx)

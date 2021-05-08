@@ -15,7 +15,7 @@
     <ClCompile Include="ArgumentProcessor.cpp">
       <Filter>InputHandling</Filter>
     </ClCompile>
-    <ClCompile Include="SearchTermsBuilderFromFile.cpp">
+    <ClCompile Include="SearchTermsBuilderFromStream.cpp">
       <Filter>SearchTerms</Filter>
     </ClCompile>
     <ClCompile Include="Main.cpp" />
@@ -33,7 +33,7 @@
     <ClInclude Include="ISearchTermsBuilder.h">
       <Filter>SearchTerms</Filter>
     </ClInclude>
-    <ClInclude Include="SearchTermsBuilderFromFile.h">
+    <ClInclude Include="SearchTermsBuilderFromStream.h">
       <Filter>SearchTerms</Filter>
     </ClInclude>
     <ClInclude Include="InputData.h">
