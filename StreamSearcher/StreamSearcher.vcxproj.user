@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LocalDebuggerCommandArguments>C:/Temp/searchTerms.txt C:/Temp/data1.txt</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>C:/Temp/searchTerms.txt C:/Temp/data1.txt C:/Temp/data2.txt C:/Temp/data3.txt C:/Temp/data4.txt C:/Temp/data5.txt</LocalDebuggerCommandArguments>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
 </Project>

@@ -20,12 +20,9 @@ int main(int argc, char* argv[])
 
         InputData inputData = ArgumentProcessor::InterpretArguments(argc, argv);
 
-        cout << "Search terms file: " << inputData.searchTermsFile << endl;
-        cout << "Data files:" << endl;
-        for (const string& dataFile : inputData.dataFiles)
-        {
-            cout << "  " << dataFile << endl;
-        }
+        cout << "Search terms file: " << endl << inputData.searchTermsFile << endl << endl;
+        cout << "Data files: " << endl;
+        copy(begin(inputData.dataFiles), end(inputData.dataFiles), ostream_iterator<string>(cout, "\n"));
         cout << endl;
 
         VectorBasedSearchTermsRegistry searchTerms;
@@ -39,26 +36,22 @@ int main(int argc, char* argv[])
         }
         cout << endl;
 
+        cout << "------------------------------" << endl << endl << "Found search terms in data files:" << endl << endl;
         for (string inputDataFile : inputData.dataFiles)
         {
             ifstream inputDataStream(inputDataFile);
             vector<string> foundSearchTerms = StreamSearcher::FindTermsInStream(searchTerms, inputDataStream);
-
-            cout << std::filesystem::path(inputDataFile).filename().string() << ": ";
-            for (auto itFoundSearchTerms = begin(foundSearchTerms); itFoundSearchTerms != end(foundSearchTerms); ++itFoundSearchTerms)
+            if (!foundSearchTerms.empty())
             {
-                cout << *itFoundSearchTerms;
-                if (itFoundSearchTerms < end(foundSearchTerms) - 1)
-                {
-                    cout << ", ";
-                }
+                cout << std::filesystem::path(inputDataFile).filename().string() << ": " << endl;
+                copy(begin(foundSearchTerms), end(foundSearchTerms), ostream_iterator<string>(cout, "\n"));
+                cout << endl;
             }
-            cout << endl << endl;
         }
 
         auto endTime = std::chrono::system_clock::now();
         auto elapsedTime = endTime - startTime;
-        std::cout << "Elapsed time: " << chrono::duration_cast<chrono::milliseconds>(elapsedTime).count() << " ms." << endl;
+        std::cout << "Elapsed time: " << chrono::duration_cast<chrono::milliseconds>(elapsedTime).count() / 1000.0 << " seconds." << endl;
     }
     catch (exception ex)
     {
