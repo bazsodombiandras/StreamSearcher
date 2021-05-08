@@ -22,7 +22,7 @@ bool SearchItem::IsFoundAfterCheckCharacter(const char c)
 	{
 		++this->currentIndex;
 
-		return this->currentIndex + 1 >= this->searchTerm.length();
+		return this->currentIndex >= this->searchTerm.length();
 	}
 	else
 	{

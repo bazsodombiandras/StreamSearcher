@@ -11,7 +11,7 @@ namespace StreamSearch
 	class StreamSearcher
 	{
 	public:
-		static const size_t StreamBufferSize;
+		static const size_t InputStreamBufferSize;
 
 		static vector<string> FindTermsInStream(const set<string>& searchTerms, istream& inputStream);
 	};
