@@ -13,20 +13,28 @@ vector<string> StreamSearcher::FindTermsInStream(const set<string>& searchTerms,
 	vector<SearchItem> searchItems;
 	transform(begin(searchTerms), end(searchTerms), back_inserter(searchItems), [](const string& searchTerm) { return SearchItem(searchTerm); });
 
-	for_each(istreambuf_iterator<char>(inputStream), istreambuf_iterator<char>(), [&searchItems, &results](char c)
-	{
-		remove_if(begin(searchItems), end(searchItems), [c, &results](SearchItem& searchItem)
+	for_each(
+		istreambuf_iterator<char>(inputStream),
+		istreambuf_iterator<char>(),
+		[&searchItems, &results](char c)
 		{
-			if (searchItem.IsFoundAfterCheckCharacter(c))
-			{
-				results.push_back(searchItem.GetSearchTerm());
+			remove_if(
+				begin(searchItems),
+				end(searchItems),
+				[c, &results](SearchItem& searchItem)
+				{
+					if (searchItem.IsFoundAfterCheckCharacter(c))
+					{
+						results.insert(end(results), searchItem.GetSearchTerm());
 
-				return true;
-			}
+						return true;
+					}
 
-			return false;
-		});
-	});
+					return false;
+				}
+			);
+		}
+	);
 
 	return results;
 }
