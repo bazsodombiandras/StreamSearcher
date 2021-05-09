@@ -10,7 +10,8 @@ using namespace std;
 SearchNode::SearchNode(char character, SearchNode* parent) :
 	character (character),
 	parent(parent),
-	children()
+	children(),
+	isSearchTermTerminator(false)
 {
 }
 
@@ -37,6 +38,11 @@ SearchNode* SearchNode::GetChild(const char c) const
 	return this->children.empty() ? nullptr : this->children.at(static_cast<unsigned char>(c)).get();
 }
 
+bool SearchNode::IsSearchTermTerminator() const
+{
+	return this->isSearchTermTerminator;
+}
+
 const string SearchNode::GetSearchTerm() const
 {
 	if (this->parent == nullptr)
@@ -61,6 +67,10 @@ void SearchNode::AddSearchTerm(const string& searchTerm, string::size_type searc
 		}
 
 		childNode->AddSearchTerm(searchTerm, searchTermCharIndex + 1);
+	}
+	else
+	{
+		this->isSearchTermTerminator = true;
 	}
 }
 

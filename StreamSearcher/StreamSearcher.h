@@ -2,7 +2,6 @@
 
 #include <istream>
 #include <set>
-#include <vector>
 
 using namespace std;
 
@@ -12,7 +11,7 @@ namespace StreamSearch
 	{
 	private:
 		set<string> searchTerms;
-		vector<string> results;
+		set<string> results;
 
 		StreamSearcher() = delete;
 
@@ -24,7 +23,7 @@ namespace StreamSearch
 		StreamSearcher(const StreamSearcher&) = default;
 		StreamSearcher(StreamSearcher&&) = default;
 
-		const vector<string>& GetResults() const;
+		const set<string>& GetResults() const;
 
 		void SearchStream(istream& inputStream);
 

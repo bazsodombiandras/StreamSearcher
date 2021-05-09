@@ -44,7 +44,7 @@ int main(int argc, char* argv[])
         {
             ifstream inputDataStream(inputDataFile);
             streamSearcher.SearchStream(inputDataStream);
-            vector<string> foundSearchTerms = streamSearcher.GetResults();
+            set<string> foundSearchTerms = streamSearcher.GetResults();
             if (!foundSearchTerms.empty())
             {
                 cout << filesystem::path(inputDataFile).filename().string() << ": " << endl;

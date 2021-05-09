@@ -14,6 +14,7 @@ namespace StreamSearch
 		char character;
 		SearchNode* parent;
 		vector<unique_ptr<SearchNode>> children;
+		bool isSearchTermTerminator;
 
 		SearchNode(const SearchNode&) = delete;
 		SearchNode& operator= (const SearchNode&) = delete;
@@ -27,6 +28,7 @@ namespace StreamSearch
 		bool IsLeaf() const;
 		SearchNode* GetChild(const char c) const;
 
+		bool IsSearchTermTerminator() const;
 		const string GetSearchTerm() const;
 		void AddSearchTerm(const string& searchTerm, string::size_type searchTermCharIndex);
 

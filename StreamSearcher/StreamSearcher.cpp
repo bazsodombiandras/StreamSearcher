@@ -12,7 +12,7 @@ StreamSearcher::StreamSearcher(const set<string>& searchTerms) :
 {
 }
 
-const vector<string>& StreamSearcher::GetResults() const
+const set<string>& StreamSearcher::GetResults() const
 {
 	return this->results;
 }
@@ -51,12 +51,16 @@ void StreamSearcher::SearchStream(istream& inputStream)
 					{
 						if (activeSearchNode != nullptr)
 						{
-							if (activeSearchNode->IsLeaf())
+							if (activeSearchNode->IsSearchTermTerminator())
 							{
-								this->results.push_back(activeSearchNode->GetSearchTerm());
-								activeSearchNode->RemoveFromParent();
+								this->results.insert(activeSearchNode->GetSearchTerm());
 
-								return true;
+								if (activeSearchNode->IsLeaf())
+								{
+									activeSearchNode->RemoveFromParent();
+
+									return true;
+								}
 							}
 						}
 						else
