@@ -39,7 +39,6 @@ int main(int argc, char* argv[])
 
         StreamSearcher streamSearcher(searchTerms);
 
-        inputData.dataFiles.resize(2);
         for (string inputDataFile : inputData.dataFiles)
         {
             ifstream inputDataStream(inputDataFile);
