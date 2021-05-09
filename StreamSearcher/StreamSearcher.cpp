@@ -2,6 +2,7 @@
 #include "SearchNode.h"
 
 #include<algorithm>
+#include <memory>
 
 using namespace StreamSearch;
 using namespace std;
@@ -21,58 +22,57 @@ void StreamSearcher::SearchStream(istream& inputStream)
 {
 	this->results.clear();
 
-	SearchNode rootNode;
-	for_each(begin(this->searchTerms), end(this->searchTerms), [&rootNode](const string& searchTerm) { rootNode.AddSearchTerm(searchTerm, 0); });
+	shared_ptr<SearchNode> rootSearchNode = make_shared<SearchNode>();
+	for_each(begin(this->searchTerms), end(this->searchTerms), [&rootSearchNode](const string& searchTerm) { rootSearchNode->AddSearchTerm(searchTerm, 0); });
 
-	vector<SearchNode*> activeSearchNodes;
+	vector<shared_ptr<SearchNode>> activeSearchNodes;
 
 	for_each(
 		istreambuf_iterator<char>(inputStream),
 		istreambuf_iterator<char>(),
-		[this, &rootNode, &activeSearchNodes](const char c)
+		[this, &rootSearchNode, &activeSearchNodes](const char c)
 		{
-			activeSearchNodes.push_back(&rootNode);
+			activeSearchNodes.push_back(rootSearchNode);
 
 			transform(
 				begin(activeSearchNodes),
 				end(activeSearchNodes),
 				begin(activeSearchNodes),
-				[c](const SearchNode* activeSearchNode)
+				[c](const auto& activeSearchNodePtr)
 				{
-					return (*activeSearchNode)[c];
+					return (*activeSearchNodePtr)[c];
 				}
 			);
 
-			activeSearchNodes.erase(
-				remove_if(
-					begin(activeSearchNodes),
-					end(activeSearchNodes),
-					[this](SearchNode* activeSearchNode)
+			auto newEnd = remove_if(
+				begin(activeSearchNodes),
+				end(activeSearchNodes),
+				[this](auto& activeSearchNodePtr)
+				{
+					if (activeSearchNodePtr != nullptr)
 					{
-						if (activeSearchNode != nullptr)
+						if (activeSearchNodePtr->IsSearchTermTerminator())
 						{
-							if (activeSearchNode->IsSearchTermTerminator())
+							this->results.insert(activeSearchNodePtr->GetSearchTerm());
+
+							if (activeSearchNodePtr->IsLeaf())
 							{
-								this->results.insert(activeSearchNode->GetSearchTerm());
+								activeSearchNodePtr->RemoveFromParent();
 
-								if (activeSearchNode->IsLeaf())
-								{
-									activeSearchNode->RemoveFromParent();
-
-									return true;
-								}
+								return true;
 							}
 						}
-						else
-						{
-							return true;
-						}
-
-						return false;
 					}
-				),
-				end(activeSearchNodes)
+					else
+					{
+						return true;
+					}
+
+					return false;
+				}
 			);
+
+			activeSearchNodes.erase(newEnd,	end(activeSearchNodes));
 		}
 	);
 }

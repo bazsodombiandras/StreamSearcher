@@ -7,7 +7,7 @@ using namespace std;
 #include <climits>
 #include <iterator>
 
-SearchNode::SearchNode(char character, SearchNode* parent) :
+SearchNode::SearchNode(const char character, weak_ptr<SearchNode> parent) :
 	character (character),
 	parent(parent),
 	children(),
@@ -15,7 +15,7 @@ SearchNode::SearchNode(char character, SearchNode* parent) :
 {
 }
 
-SearchNode& SearchNode::AddChildNode(const char c)
+shared_ptr<SearchNode> SearchNode::AddChildNode(const char c)
 {
 	if (this->children.empty())
 	{
@@ -23,9 +23,9 @@ SearchNode& SearchNode::AddChildNode(const char c)
 		fill(begin(this->children), end(this->children), nullptr);
 	}
 
-	this->children[static_cast<unsigned char>(c)] = make_unique<SearchNode>(c, this);
+	this->children[static_cast<unsigned char>(c)] = make_shared<SearchNode>(c, shared_from_this());
 
-	return *this->children[static_cast<unsigned char>(c)];
+	return this->children[static_cast<unsigned char>(c)];
 }
 
 bool SearchNode::IsLeaf() const
@@ -33,9 +33,9 @@ bool SearchNode::IsLeaf() const
 	return this->children.empty();
 }
 
-SearchNode* SearchNode::GetChild(const char c) const
+shared_ptr<SearchNode> SearchNode::GetChild(const char c) const
 {
-	return this->children.empty() ? nullptr : this->children.at(static_cast<unsigned char>(c)).get();
+	return this->children.empty() ? nullptr : this->children.at(static_cast<unsigned char>(c));
 }
 
 bool SearchNode::IsSearchTermTerminator() const
@@ -45,14 +45,7 @@ bool SearchNode::IsSearchTermTerminator() const
 
 const string SearchNode::GetSearchTerm() const
 {
-	if (this->parent == nullptr)
-	{
-		return "";
-	}
-	else
-	{
-		return this->parent->GetSearchTerm() + this->character;
-	}
+	return this->parent.expired() ? "" : this->parent.lock()->GetSearchTerm() + this->character;
 }
 
 void SearchNode::AddSearchTerm(const string& searchTerm, string::size_type searchTermCharIndex)
@@ -60,10 +53,10 @@ void SearchNode::AddSearchTerm(const string& searchTerm, string::size_type searc
 	if (searchTermCharIndex < searchTerm.length())
 	{
 		const char c = searchTerm[searchTermCharIndex];
-		SearchNode* childNode = GetChild(c);
+		shared_ptr<SearchNode> childNode = GetChild(c);
 		if (childNode == nullptr)
 		{
-			childNode = &AddChildNode(c);
+			childNode = AddChildNode(c);
 		}
 
 		childNode->AddSearchTerm(searchTerm, searchTermCharIndex + 1);
@@ -76,18 +69,19 @@ void SearchNode::AddSearchTerm(const string& searchTerm, string::size_type searc
 
 void SearchNode::RemoveFromParent()
 {
-	if (this->parent != nullptr)
+	if (!this->parent.expired())
 	{
-		SearchNode* parentNode = this->parent;
-		parentNode->children[static_cast<unsigned char>(this->character)] = nullptr;
-		if (all_of(begin(parentNode->children), end(parentNode->children), [](const unique_ptr<SearchNode>& childNodePtr) { return !childNodePtr; }))
+		shared_ptr<SearchNode> parentPtr = this->parent.lock();
+		parentPtr->children[static_cast<unsigned char>(this->character)] = nullptr;
+		if (all_of(begin(parentPtr->children), end(parentPtr->children), [](const auto& childNodePtr) { return !childNodePtr; }))
 		{
-			parentNode->RemoveFromParent();
+			parentPtr->RemoveFromParent();
 		}
+		this->parent.reset();
 	}
 }
 
-SearchNode* SearchNode::operator[] (const char c) const
+shared_ptr<SearchNode> SearchNode::operator[] (const char c) const
 {
 	return GetChild(c);
 }
