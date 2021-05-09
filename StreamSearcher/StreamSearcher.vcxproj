@@ -142,7 +142,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ArgumentProcessor.cpp" />
-    <ClCompile Include="SearchItem.cpp" />
+    <ClCompile Include="SearchNode.cpp" />
     <ClCompile Include="SearchTermsBuilderFromStream.cpp" />
     <ClCompile Include="StreamSearcher.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -151,7 +151,7 @@
     <ClInclude Include="ArgumentProcessor.h" />
     <ClInclude Include="ISearchTermsBuilder.h" />
     <ClInclude Include="InputData.h" />
-    <ClInclude Include="SearchItem.h" />
+    <ClInclude Include="SearchNode.h" />
     <ClInclude Include="SearchTermsBuilderFromStream.h" />
     <ClInclude Include="StreamSearcher.h" />
   </ItemGroup>

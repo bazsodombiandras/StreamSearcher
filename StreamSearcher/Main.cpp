@@ -36,10 +36,15 @@ int main(int argc, char* argv[])
 
         cout << "------------------------------" << endl << endl;
         cout << "Searching for terms in data files..." << endl << endl;
+
+        StreamSearcher streamSearcher(searchTerms);
+
+        inputData.dataFiles.resize(2);
         for (string inputDataFile : inputData.dataFiles)
         {
             ifstream inputDataStream(inputDataFile);
-            vector<string> foundSearchTerms = StreamSearcher::FindTermsInStream(searchTerms, inputDataStream);
+            streamSearcher.SearchStream(inputDataStream);
+            vector<string> foundSearchTerms = streamSearcher.GetResults();
             if (!foundSearchTerms.empty())
             {
                 cout << filesystem::path(inputDataFile).filename().string() << ": " << endl;

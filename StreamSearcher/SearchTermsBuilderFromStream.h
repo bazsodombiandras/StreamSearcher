@@ -15,19 +15,20 @@ namespace SearchTerms
 
 		istream& inputStream;
 
-		SearchTermsBuilderFromStream() = delete;
-		SearchTermsBuilderFromStream(const SearchTermsBuilderFromStream&) = delete;
-		SearchTermsBuilderFromStream(SearchTermsBuilderFromStream&&) = delete;
-
-		SearchTermsBuilderFromStream& operator= (const SearchTermsBuilderFromStream&) = delete;
-		SearchTermsBuilderFromStream& operator= (SearchTermsBuilderFromStream&&) = delete;
+		SearchTermsBuilderFromStream() = delete;		
 
 	public:
 		SearchTermsBuilderFromStream(istream& inputStream);
 
+		SearchTermsBuilderFromStream(const SearchTermsBuilderFromStream&) = default;
+		SearchTermsBuilderFromStream(SearchTermsBuilderFromStream&&) = default;
+
 		virtual ~SearchTermsBuilderFromStream() = default;
 
 		virtual void Build(set<string>& searchTerms);
+
+		virtual SearchTermsBuilderFromStream& operator= (const SearchTermsBuilderFromStream&) = default;
+		virtual SearchTermsBuilderFromStream& operator= (SearchTermsBuilderFromStream&&) = default;
 	};
 }
 

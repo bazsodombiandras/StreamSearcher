@@ -1,40 +1,74 @@
 #include "StreamSearcher.h"
-#include "SearchItem.h"
+#include "SearchNode.h"
 
 #include<algorithm>
 
 using namespace StreamSearch;
 using namespace std;
 
-vector<string> StreamSearcher::FindTermsInStream(const set<string>& searchTerms, istream& inputStream)
+StreamSearcher::StreamSearcher(const set<string>& searchTerms) :
+	searchTerms(searchTerms),
+	results()
 {
-	vector<string> results;
+}
 
-	vector<SearchItem> searchItems;
-	transform(begin(searchTerms), end(searchTerms), back_inserter(searchItems), [](const string& searchTerm) { return SearchItem(searchTerm); });
+const vector<string>& StreamSearcher::GetResults() const
+{
+	return this->results;
+}
+
+void StreamSearcher::SearchStream(istream& inputStream)
+{
+	this->results.clear();
+
+	SearchNode rootNode;
+	for_each(begin(this->searchTerms), end(this->searchTerms), [&rootNode](const string& searchTerm) { rootNode.AddSearchTerm(searchTerm, 0); });
+
+	vector<SearchNode*> activeSearchNodes;
 
 	for_each(
 		istreambuf_iterator<char>(inputStream),
 		istreambuf_iterator<char>(),
-		[&searchItems, &results](char c)
+		[this, &rootNode, &activeSearchNodes](const char c)
 		{
-			remove_if(
-				begin(searchItems),
-				end(searchItems),
-				[c, &results](SearchItem& searchItem)
+			activeSearchNodes.push_back(&rootNode);
+
+			transform(
+				begin(activeSearchNodes),
+				end(activeSearchNodes),
+				begin(activeSearchNodes),
+				[c](const SearchNode* activeSearchNode)
 				{
-					if (searchItem.IsFoundAfterCheckCharacter(c))
-					{
-						results.insert(end(results), searchItem.GetSearchTerm());
-
-						return true;
-					}
-
-					return false;
+					return (*activeSearchNode)[c];
 				}
+			);
+
+			activeSearchNodes.erase(
+				remove_if(
+					begin(activeSearchNodes),
+					end(activeSearchNodes),
+					[this](SearchNode* activeSearchNode)
+					{
+						if (activeSearchNode != nullptr)
+						{
+							if (activeSearchNode->IsLeaf())
+							{
+								this->results.push_back(activeSearchNode->GetSearchTerm());
+								activeSearchNode->RemoveFromParent();
+
+								return true;
+							}
+						}
+						else
+						{
+							return true;
+						}
+
+						return false;
+					}
+				),
+				end(activeSearchNodes)
 			);
 		}
 	);
-
-	return results;
 }

@@ -22,7 +22,7 @@
     <ClCompile Include="StreamSearcher.cpp">
       <Filter>Search</Filter>
     </ClCompile>
-    <ClCompile Include="SearchItem.cpp">
+    <ClCompile Include="SearchNode.cpp">
       <Filter>Search</Filter>
     </ClCompile>
   </ItemGroup>
@@ -42,7 +42,7 @@
     <ClInclude Include="StreamSearcher.h">
       <Filter>Search</Filter>
     </ClInclude>
-    <ClInclude Include="SearchItem.h">
+    <ClInclude Include="SearchNode.h">
       <Filter>Search</Filter>
     </ClInclude>
   </ItemGroup>
