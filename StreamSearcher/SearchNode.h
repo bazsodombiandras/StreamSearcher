@@ -3,38 +3,40 @@
 #include <memory>
 #include <string>
 #include <vector>
+#include <set>
 
 using namespace std;
 
 namespace StreamSearch
 {
-	class SearchNode : public std::enable_shared_from_this<SearchNode>
+	class SearchNode
 	{
 	private:
 		char character;
-		weak_ptr<SearchNode> parent;
-		vector<shared_ptr<SearchNode>> children;
+		SearchNode* parent;
+		vector<unique_ptr<SearchNode>> children;
 		bool isSearchTermTerminator;
 
 		SearchNode(const SearchNode&) = delete;
 		SearchNode& operator= (const SearchNode&) = delete;
 
-		shared_ptr<SearchNode> AddChildNode(const char c);
+		SearchNode* AddChildNode(const char c);
 
 	public:
-		SearchNode(const char character = 0, weak_ptr<SearchNode> parent = weak_ptr<SearchNode>());
+		SearchNode(const char character = 0, SearchNode* parent = nullptr);
 		SearchNode(SearchNode&&) = default;
 
+		size_t GetNodeCount() const;
 		bool IsLeaf() const;
-		shared_ptr<SearchNode> GetChild(const char c) const;
+		SearchNode* GetChild(const char c) const;
 
 		bool IsSearchTermTerminator() const;
 		const string GetSearchTerm() const;
 		void AddSearchTerm(const string& searchTerm, string::size_type searchTermCharIndex);
 
-		void RemoveFromParent();
+		void EraseBranch(set<SearchNode*>* erasedNodes);
 
 		SearchNode& operator= (SearchNode&&) = default;
-		shared_ptr<SearchNode> operator[] (const char c) const;
+		SearchNode* operator[] (const char c) const;
 	};
 }

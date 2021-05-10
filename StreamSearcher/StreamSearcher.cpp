@@ -4,6 +4,8 @@
 #include<algorithm>
 #include <memory>
 
+#include<iostream>
+
 using namespace StreamSearch;
 using namespace std;
 
@@ -22,19 +24,29 @@ void StreamSearcher::SearchStream(istream& inputStream)
 {
 	this->results.clear();
 
-	shared_ptr<SearchNode> rootSearchNode = make_shared<SearchNode>();
-	for_each(begin(this->searchTerms), end(this->searchTerms), [&rootSearchNode](const string& searchTerm) { rootSearchNode->AddSearchTerm(searchTerm, 0); });
+	SearchNode rootSearchNode;
+	for_each
+	(
+		begin(this->searchTerms),
+		end(this->searchTerms),
+		[&rootSearchNode](const string& searchTerm)
+		{
+			rootSearchNode.AddSearchTerm(searchTerm, 0);
+		}
+	);
 
-	vector<shared_ptr<SearchNode>> activeSearchNodes;
+	vector<SearchNode*> activeSearchNodes;
 
-	for_each(
+	for_each
+	(
 		istreambuf_iterator<char>(inputStream),
 		istreambuf_iterator<char>(),
 		[this, &rootSearchNode, &activeSearchNodes](const char c)
 		{
-			activeSearchNodes.push_back(rootSearchNode);
+			activeSearchNodes.push_back(&rootSearchNode);
 
-			transform(
+			transform
+			(
 				begin(activeSearchNodes),
 				end(activeSearchNodes),
 				begin(activeSearchNodes),
@@ -44,35 +56,66 @@ void StreamSearcher::SearchStream(istream& inputStream)
 				}
 			);
 
-			auto newEnd = remove_if(
-				begin(activeSearchNodes),
-				end(activeSearchNodes),
-				[this](auto& activeSearchNodePtr)
-				{
-					if (activeSearchNodePtr != nullptr)
+			vector<SearchNode*> reachedLeafSearchNodes;
+
+			activeSearchNodes.erase
+			(
+				remove_if
+				(
+					begin(activeSearchNodes),
+					end(activeSearchNodes),
+					[this, &reachedLeafSearchNodes](auto& activeSearchNodePtr)
 					{
-						if (activeSearchNodePtr->IsSearchTermTerminator())
+						if (activeSearchNodePtr != nullptr)
 						{
-							this->results.insert(activeSearchNodePtr->GetSearchTerm());
-
-							if (activeSearchNodePtr->IsLeaf())
+							if (activeSearchNodePtr->IsSearchTermTerminator())
 							{
-								activeSearchNodePtr->RemoveFromParent();
+								this->results.insert(activeSearchNodePtr->GetSearchTerm());
 
-								return true;
+								if (activeSearchNodePtr->IsLeaf())
+								{
+									reachedLeafSearchNodes.push_back(activeSearchNodePtr);
+
+									return true;
+								}
 							}
 						}
-					}
-					else
-					{
-						return true;
-					}
+						else
+						{
+							return true;
+						}
 
-					return false;
+						return false;
+					}
+				),
+				end(activeSearchNodes)
+			);
+
+			set<SearchNode*> erasedSearchNodes;
+
+			for_each
+			(
+				begin(reachedLeafSearchNodes),
+				end(reachedLeafSearchNodes),
+				[&erasedSearchNodes](auto& leafSearchNodePtr)
+				{
+					leafSearchNodePtr->EraseBranch(&erasedSearchNodes);
 				}
 			);
 
-			activeSearchNodes.erase(newEnd,	end(activeSearchNodes));
+			activeSearchNodes.erase
+			(
+				remove_if
+				(
+					begin(activeSearchNodes),
+					end(activeSearchNodes),
+					[&erasedSearchNodes](auto& activeSearchNodePtr)
+					{
+						return erasedSearchNodes.find(activeSearchNodePtr) != erasedSearchNodes.end();
+					}
+				),
+				end(activeSearchNodes)
+			);
 		}
 	);
 }
