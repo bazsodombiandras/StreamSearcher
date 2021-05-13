@@ -91,6 +91,12 @@ namespace StreamSearch
 		bool IsLeaf() const;
 
 		/// <summary>
+		/// Gets whether this search node has child nodes or not.
+		/// </summary>
+		/// <returns>True if this search node has child nodes, otherwise false.</returns>
+		bool HasChildren() const;
+
+		/// <summary>
 		/// Gets the child node of this search node which corresponds to the given character or null if there is no such child node.
 		/// </summary>
 		/// <param name="c">The character to find the child node by.</param>

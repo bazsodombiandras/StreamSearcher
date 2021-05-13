@@ -18,7 +18,7 @@ SearchNode::SearchNode(const char character, SearchNode* parent):
 
 SearchNode* SearchNode::AddChildNode(const char c)
 {
-	if (this->children.empty())
+	if (!this->HasChildren())
 	{
 		this->children.resize(UCHAR_MAX);
 		fill(begin(this->children), end(this->children), nullptr);
@@ -31,9 +31,8 @@ SearchNode* SearchNode::AddChildNode(const char c)
 
 size_t SearchNode::GetNodeCount() const
 {
-	return this->children.empty()
-		? 1
-		: accumulate
+	return this->HasChildren()
+		? accumulate
 		(
 			begin(this->children),
 			end(this->children),
@@ -42,17 +41,23 @@ size_t SearchNode::GetNodeCount() const
 			{
 				return nodeCount + (childNodePtr ? childNodePtr->GetNodeCount() : 0);
 			}
-		);
+		)
+		: 1;
 }
 
 bool SearchNode::IsLeaf() const
 {
-	return this->children.empty();
+	return !this->HasChildren();
+}
+
+bool SearchNode::HasChildren() const
+{
+	return !this->children.empty();
 }
 
 SearchNode* SearchNode::GetChild(const char c) const
 {
-	return this->children.empty() ? nullptr : this->children.at(static_cast<unsigned char>(c)).get();
+	return this->HasChildren() ? this->children.at(static_cast<unsigned char>(c)).get() : nullptr;
 }
 
 bool SearchNode::IsSearchTermTerminator() const
