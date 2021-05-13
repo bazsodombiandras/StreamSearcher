@@ -27,7 +27,7 @@ namespace InputDataHandling
 		virtual bool IsInputDataAvailable() const = 0;
 
 		/// <summary>
-		/// Gets the current input stream and advances the input data souurce to the next input stream.
+		/// Gets the current input stream and advances the input data source to the next input stream.
 		/// The actual implementation is delegated to the descendant classes.
 		/// </summary>
 		/// <returns>the current input stream.</returns>

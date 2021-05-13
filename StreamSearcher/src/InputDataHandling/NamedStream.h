@@ -8,7 +8,7 @@ using namespace std;
 namespace InputDataHandling
 {
 	/// <summary>
-	/// Represents a named inpt stream.
+	/// Represents a named input stream.
 	/// </summary>
 	class NamedInputStream
 	{

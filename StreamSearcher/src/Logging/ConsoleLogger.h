@@ -22,8 +22,8 @@ namespace Logging
 		/// <summary>
 		/// Constructs an instance of this class based on a maximum log level and options to include a time stamp and the message type into the output.
 		/// </summary>
-		/// <param name="logLevel">The maximum log level. Any message which has a level higher than this will be ommitted.</param>
-		/// <param name="includeTimestamp">Specifies whether a timestamp should be included into the log messages.</param>
+		/// <param name="logLevel">The maximum log level. Any message which has a level higher than this will be omitted.</param>
+		/// <param name="includeTimestamp">Specifies whether a time stamp should be included into the log messages.</param>
 		/// <param name="includeMessageType">Specifies whether the message type should be included into the log messages.</param>
 		ConsoleLogger(MsgType logLevel, bool includeTimestamp = true, bool includeMessageType = true);
 
@@ -34,7 +34,7 @@ namespace Logging
 		ConsoleLogger(const ConsoleLogger& other) = delete;
 
 		/// <summary>
-		/// The move constructor is disabled becaue there s a single globally accessible instance.
+		/// The move constructor is disabled because there s a single globally accessible instance.
 		/// </summary>
 		/// <param name="">The other instance to move from.</param>
 		ConsoleLogger(ConsoleLogger&& other) = delete;
@@ -54,22 +54,22 @@ namespace Logging
 		/// The copy assignment operator is disabled because there is a single globally accessible instance.
 		/// </summary>
 		/// <param name="">The other instance to copy from.</param>
-		/// <returns>The insatnce into which the data has been copied.</returns>
+		/// <returns>The instance into which the data has been copied.</returns>
 		ConsoleLogger& operator= (const ConsoleLogger& other) = delete;
 
 		/// <summary>
 		/// The move assignment operator is disabled because there is a single globally accessible instance.
 		/// </summary>
 		/// <param name="">The other instance to move from.</param>
-		/// <returns>The insatnce into which the data has been moved.</returns>
+		/// <returns>The instance into which the data has been moved.</returns>
 		ConsoleLogger& operator= (ConsoleLogger&& other) = delete;
 
 	public:
 		/// <summary>
 		/// Initializes the single globally accessible static instance based on a maximum log level and options to include a time stamp and the message type into the output.
 		/// </summary>
-		/// <param name="logLevel">The maximum log level. Any message which has a level higher than this will be ommitted.</param>
-		/// <param name="includeTimestamp">Specifies whether a timestamp should be included into the log messages.</param>
+		/// <param name="logLevel">The maximum log level. Any message which has a level higher than this will be omitted.</param>
+		/// <param name="includeTimestamp">Specifies whether a time stamp should be included into the log messages.</param>
 		/// <param name="includeMessageType">Specifies whether the message type should be included into the log messages.</param>
 		static void Init(MsgType logLevel = Logger::MsgType::Debug, bool includeTimestamp = true, bool includeMessageType = true);
 	};

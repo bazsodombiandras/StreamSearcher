@@ -25,7 +25,7 @@ namespace InputDataHandling
 		bool IsInputDataAvailable() const override;
 
 		/// <summary>
-		/// Gets the current input stream and advances the input data souurce to the next input stream.
+		/// Gets the current input stream and advances the input data source to the next input stream.
 		/// </summary>
 		/// <returns>the current input stream.</returns>
 		NamedInputStream GetCurrentInputStreamAndMoveNext() override;

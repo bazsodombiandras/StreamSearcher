@@ -14,7 +14,7 @@ namespace InputArgumentsHandling
 	{
 	public:
 		/// <summary>
-		/// The input file containing the serach terms.
+		/// The input file containing the search terms.
 		/// </summary>
 		string searchTermsFile;
 

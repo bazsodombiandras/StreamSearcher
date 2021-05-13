@@ -15,7 +15,7 @@ namespace SearchTermsHandling
 	{
 	private:
 		/// <summary>
-		/// The maximum length that is allowed for a serach term.
+		/// The maximum length that is allowed for a search term.
 		/// </summary>
 		static const size_t MaxSearchTermLength;
 

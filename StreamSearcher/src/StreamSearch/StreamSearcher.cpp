@@ -18,7 +18,7 @@ void StreamSearcher::SearchStream(istream& inputStream)
 	this->results.clear();
 
 	// Build the tree of search nodes starting with a root node and creating child nodes as necessary based on the search terms.
-	// The characters in the search terms determine which search nodes will be created because the actual search is ietarting over
+	// The characters in the search terms determine which search nodes will be created because the actual search is iterating over
 	// the characters read from the input stream and looking for them in the search tree constructed from the search terms.
 	SearchNode rootSearchNode;
 	for_each
@@ -36,11 +36,11 @@ void StreamSearcher::SearchStream(istream& inputStream)
 	// These are actually pointers to nodes of the search tree which keep track of parallel running searches of the input stream characters
 	// along the branches of the search tree.
 	// Each input stream character starts a new search (and creates a new active search node pointer to keep track of it).
-	// As long as next input characters are matched to child nodes in the search tree, the active search node pointer is advanced deper into the search tree.
+	// As long as next input characters are matched to child nodes in the search tree, the active search node pointer is advanced deeper into the search tree.
 	// There can be two outcomes which eliminates an active search node pointer:
 	// 1. The next input character is not matched to a child node in the search tree but the active search node pointer has not reached a leaf node in the search tree.
 	//    This means that not the entire search term was matched, so there is no result generated.
-	// 2. When the next input charcter is macthed to a leaf node in the search tree it means that the complete search term was matched, so that search term is a result.
+	// 2. When the next input character is matched to a leaf node in the search tree it means that the complete search term was matched, so that search term is a result.
 	vector<SearchNode*> activeSearchNodePtrs;
 
 	// Iterate over the characters of the input stream...
@@ -55,8 +55,8 @@ void StreamSearcher::SearchStream(istream& inputStream)
 			activeSearchNodePtrs.push_back(&rootSearchNode);
 
 			// Advance all the active search node pointers deeper into the search tree.
-			// If a given active earch node pointer cannot be advanced deeper because the current input stream character cannot be macthed,
-			// then after this step that active searchnode pointer will be null.
+			// If a given active search node pointer cannot be advanced deeper because the current input stream character cannot be matched,
+			// then after this step that active search node pointer will be null.
 			transform
 			(
 				begin(activeSearchNodePtrs),
@@ -70,13 +70,13 @@ void StreamSearcher::SearchStream(istream& inputStream)
 
 			// Gather all the active search node pointers which have reached a leaf in the search tree.
 			// We collect them because we want to eliminate their branches from the search tree.
-			// This results ina  smaller search tree every time a result is found and leads to more optimal performance.
+			// This results in a smaller search tree every time a result is found and leads to more optimal performance.
 			// In other words every time a search term is found, we eliminate the corresponding branch from the search tree
-			// because if  it has been found there si no point in looking for it again.
+			// because if  it has been found there is no point in looking for it again.
 			vector<SearchNode*> reachedLeafSearchNodes;
 
-			// Get rid of all the active search nodes which have either become null because the current input stream chaarcter could not be matched (dead end)
-			// or which have reached a leaf node in the serach tree, meaning that they cannot advance any deeper and they have produced a result.
+			// Get rid of all the active search nodes which have either become null because the current input stream character could not be matched (dead end)
+			// or which have reached a leaf node in the search tree, meaning that they cannot advance any deeper and they have produced a result.
 			activeSearchNodePtrs.erase
 			(
 				remove_if
@@ -90,7 +90,7 @@ void StreamSearcher::SearchStream(istream& inputStream)
 							if (activeSearchNodePtr->IsSearchTermTerminator())
 							{
 								// A search term might have been completely found even if the corresponding active search node pointer has not yet reached a leaf node
-								// Example: "app" is matched but there is a not yet macthed search term "apple" on the same branch in the search tree.
+								// Example: "app" is matched but there is a not yet matched search term "apple" on the same branch in the search tree.
 								this->results.insert(activeSearchNodePtr->GetSearchTerm());
 
 								if (activeSearchNodePtr->IsLeaf())
@@ -98,7 +98,7 @@ void StreamSearcher::SearchStream(istream& inputStream)
 									// Collect the active search node pointers which have reached leaves in the search tree.
 									reachedLeafSearchNodes.push_back(activeSearchNodePtr);
 
-									// Eliminate the active search node pointers which have recahed leaves in the search tree.
+									// Eliminate the active search node pointers which have reached leaves in the search tree.
 									return true;
 								}
 							}
@@ -109,7 +109,7 @@ void StreamSearcher::SearchStream(istream& inputStream)
 							return true;
 						}
 
-						// Keep all the active search node pointers which have been macthed using the current input stream character and are still in the middle of the tree
+						// Keep all the active search node pointers which have been matched using the current input stream character and are still in the middle of the tree
 						// (they represent searches in progress).
 						return false;
 					}
@@ -124,7 +124,7 @@ void StreamSearcher::SearchStream(istream& inputStream)
 			// otherwise we could end up with active search node pointers pointing to destroyed data.
 			set<SearchNode*> erasedSearchNodes;
 
-			// Eliminate the search tree branches of reached leaf nodes (results have been geneartd from them, they are n longer needed).
+			// Eliminate the search tree branches of reached leaf nodes (results have been generated from them, they are n longer needed).
 			for_each
 			(
 				begin(reachedLeafSearchNodes),
@@ -135,7 +135,7 @@ void StreamSearcher::SearchStream(istream& inputStream)
 				}
 			);
 
-			// Get rid of the active search nodes which corrspond to eliminated search tree nodes, so that we don't end up with
+			// Get rid of the active search nodes which correspond to eliminated search tree nodes, so that we don't end up with
 			// active search node pointers that point to destroyed data.
 			activeSearchNodePtrs.erase
 			(

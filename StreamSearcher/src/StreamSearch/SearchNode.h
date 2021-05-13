@@ -12,12 +12,12 @@ namespace StreamSearch
 	/// <summary>
 	/// Represents a search node used in the stream search algorithm.
 	/// A search node basically represents a character which exists in one or more of the search terms.
-	/// Every search term generates a chain of earch nodes linked into a parent-child relationship.
-	/// The search nodes forma  search tree which is iterated by the earch algorithm on multiple branches in parallel
+	/// Every search term generates a chain of search nodes linked into a parent-child relationship.
+	/// The search nodes form a search tree which is iterated by the search algorithm on multiple branches in parallel
 	/// (multiple search terms are looked for simultaneously).
-	/// A search is successful (a result is generated) if a search node is a search term terminator (includes the case whenit's a leaf node).
+	/// A search is successful (a result is generated) if a search node is a search term terminator (includes the case when it's a leaf node).
 	/// A search fails if the search algorithm cannot advance a current (active) search from a search node to one of its children
-	/// based on the current charcter read from the input stream.
+	/// based on the current character read from the input stream.
 	/// </summary>
 	class SearchNode
 	{
@@ -40,20 +40,20 @@ namespace StreamSearch
 		/// <summary>
 		/// Is this search node a search term terminator?
 		/// We need to keep track of this because a search term may end at a search node even if the node is not leaf.
-		// Example: "app" is matched but there is a not yet macthed search term "apple" on the same branch in the search tree.
+		// Example: "app" is matched but there is a not yet matched search term "apple" on the same branch in the search tree.
 		/// </summary>
 		bool isSearchTermTerminator;
 
 		/// <summary>
 		/// Search node copying through the copy constructor is disabled.
 		/// </summary>
-		/// <param name="">The other insatnce from which to copy the data.</param>
+		/// <param name="">The other instance from which to copy the data.</param>
 		SearchNode(const SearchNode&) = delete;
 
 		/// <summary>
 		/// Search node copying through the copy assignment operator is disabled.
 		/// </summary>
-		/// <param name="">The other insatnce from which to copy the data.</param>
+		/// <param name="">The other instance from which to copy the data.</param>
 		/// <returns>The instance into which the data has been copied.</returns>
 		SearchNode& operator= (const SearchNode&) = delete;
 
@@ -75,11 +75,11 @@ namespace StreamSearch
 		/// <summary>
 		/// Allows moving the data of the search node through the default move constructor.
 		/// </summary>
-		/// <param name="">The insatnce from which the data is moved.</param>
+		/// <param name="">The instance from which the data is moved.</param>
 		SearchNode(SearchNode&&) = default;
 
 		/// <summary>
-		/// Gets the toal number of child nodes in the sub-tree of this search node.
+		/// Gets the total number of child nodes in the sub-tree of this search node.
 		/// </summary>
 		/// <returns>The total number of child nodes in the sub-tree of this search node.</returns>
 		size_t GetNodeCount() const;
@@ -91,14 +91,14 @@ namespace StreamSearch
 		bool IsLeaf() const;
 
 		/// <summary>
-		/// Gets the child node of this search node which corresponds to the given character or null if there si no such child node.
+		/// Gets the child node of this search node which corresponds to the given character or null if there is no such child node.
 		/// </summary>
 		/// <param name="c">The character to find the child node by.</param>
-		/// <returns>The child node corresponding to the character or null if there si no such child node.</returns>
+		/// <returns>The child node corresponding to the character or null if there is no such child node.</returns>
 		SearchNode* GetChild(const char c) const;
 
 		/// <summary>
-		/// Gets whether this seacrh node is a search term terminator (a search term ends at this node in the tree).
+		/// Gets whether this search node is a search term terminator (a search term ends at this node in the tree).
 		/// </summary>
 		/// <returns>True if this search node is a search term terminator, otherwise false.</returns>
 		bool IsSearchTermTerminator() const;
@@ -110,17 +110,17 @@ namespace StreamSearch
 		const string GetSearchTerm() const;
 
 		/// <summary>
-		/// Creates and adds possibly multiple child nodes to this serach node as required by the given search term.
-		/// In other words it makes sure that the search tree has a branch corrweposning to the given search term.
+		/// Creates and adds possibly multiple child nodes to this search node as required by the given search term.
+		/// In other words it makes sure that the search tree has a branch corresponding to the given search term.
 		/// </summary>
 		/// <param name="searchTerm">the search term.</param>
 		/// <param name="searchTermCharIndex">The current character index of the search term.</param>
 		void AddSearchTerm(const string& searchTerm, string::size_type searchTermCharIndex);
 
 		/// <summary>
-		/// Reoves the branch of the search tree which ends at this search node and which has no other sub-branches.
+		/// Removes the branch of the search tree which ends at this search node and which has no other sub-branches.
 		/// In other words it removes all the search nodes upwards from this search node which have no other child nodes.
-		/// This is used to optimize the search by pruning branches of the search tree which have already genearted results.
+		/// This is used to optimize the search by pruning branches of the search tree which have already generated results.
 		/// </summary>
 		/// <param name="erasedNodes">Output parameter: the removed search nodes.</param>
 		void EraseBranch(set<SearchNode*>* erasedNodes);
@@ -129,14 +129,14 @@ namespace StreamSearch
 		/// Allows moving the data of the search node through the default move assignment operator.
 		/// </summary>
 		/// <param name="">The instance from which to move the data.</param>
-		/// <returns>The insatnce into which the data has been moved.</returns>
+		/// <returns>The instance into which the data has been moved.</returns>
 		SearchNode& operator= (SearchNode&&) = default;
 
 		/// <summary>
 		/// Convenient short alias for the GetChild() method.
 		/// </summary>
 		/// <param name="c">The character to find the child node by.</param>
-		/// <returns>The child node corresponding to the character or null if there si no such child node.</returns>
+		/// <returns>The child node corresponding to the character or null if there is no such child node.</returns>
 		SearchNode* operator[] (const char c) const;
 	};
 }

@@ -27,7 +27,7 @@ namespace StreamSearch
 		set<string> results;
 
 		/// <summary>
-		/// The default constructor si disabled because the search terms are always needed to construct an instance (makes no sense to search for nothing).
+		/// The default constructor is disabled because the search terms are always needed to construct an instance (makes no sense to search for nothing).
 		/// </summary>
 		StreamSearcher() = delete;
 
@@ -39,7 +39,7 @@ namespace StreamSearch
 
 	public:
 		/// <summary>
-		/// Constructs an insatnce of ths class based on a collection of search terms.
+		/// Constructs an instance of this class based on a collection of search terms.
 		/// </summary>
 		/// <param name="searchTerms">The search terms.</param>
 		StreamSearcher(const set<string>& searchTerms);

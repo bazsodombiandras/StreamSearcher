@@ -21,7 +21,7 @@ using namespace std;
 int main(int argc, char* argv[])
 {
     // Initialize the globally available static instance of the logger as a console logger.
-    // This mans that everythgin will be logged to the console. In theory a file logger could be used too.
+    // This mans that everything will be logged to the console. In theory a file logger could be used too.
     ConsoleLogger::Init(Logger::MsgType::Debug, true, true);
 
     try
@@ -67,7 +67,7 @@ int main(int argc, char* argv[])
     }
     catch (...)
     {
-        Logger::Error("Unexpected eception encountered.");
+        Logger::Error("Unexpected exception encountered.");
         return 2;
     }
 

@@ -56,7 +56,7 @@ namespace Utils
 		/// The move assignment operator allows moving the timer's data.
 		/// </summary>
 		/// <param name="">The other instance to move the data from.</param>
-		/// <returns>The instance into which the data has beenn moved.</returns>
+		/// <returns>The instance into which the data has been moved.</returns>
 		Timer& operator= (Timer&&) = default;
 	};
 }
