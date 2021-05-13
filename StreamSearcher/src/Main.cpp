@@ -1,11 +1,11 @@
-#include "ArgumentProcessor.h"
-#include "FileInputDataSource.h"
-#include "ConsoleLogger.h"
-#include "MockInputDataSource.h"
-#include "SearchTermsBuilderFromMockData.h"
-#include "SearchTermsBuilderFromStream.h"
-#include "StreamSearcher.h"
-#include "Timer.h"
+#include "../src/InputArgumentsHandling/ArgumentProcessor.h"
+#include "../src/InputDataHandling/FileInputDataSource.h"
+#include "../src/InputDataHandling/MockInputDataSource.h"
+#include "../src/Logging/ConsoleLogger.h"
+#include "../src/SearchTermsHandling/SearchTermsBuilderFromMockData.h"
+#include "../src/SearchTermsHandling/SearchTermsBuilderFromStream.h"
+#include "../src/StreamSearch/StreamSearcher.h"
+#include "../src/Utils/Timer.h"
 
 #include <fstream>
 

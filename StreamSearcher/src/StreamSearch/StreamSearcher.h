@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IInputDataSource.h"
+#include "../InputDataHandling/IInputDataSource.h"
 
 #include <istream>
 #include <set>

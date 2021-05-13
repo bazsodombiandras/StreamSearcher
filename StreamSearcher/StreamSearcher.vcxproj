@@ -18,6 +18,36 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\InputArgumentsHandling\ArgumentProcessor.cpp" />
+    <ClCompile Include="src\InputDataHandling\FileInputDataSource.cpp" />
+    <ClCompile Include="src\InputDataHandling\MockInputDataSource.cpp" />
+    <ClCompile Include="src\Logging\ConsoleLogger.cpp" />
+    <ClCompile Include="src\Logging\Logger.cpp" />
+    <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\SearchTermsHandling\SearchTermsBuilderFromMockData.cpp" />
+    <ClCompile Include="src\SearchTermsHandling\SearchTermsBuilderFromStream.cpp" />
+    <ClCompile Include="src\StreamSearch\SearchNode.cpp" />
+    <ClCompile Include="src\StreamSearch\StreamSearcher.cpp" />
+    <ClCompile Include="src\Utils\Timer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\InputArgumentsHandling\ArgumentProcessor.h" />
+    <ClInclude Include="src\InputArgumentsHandling\InputArguments.h" />
+    <ClInclude Include="src\InputDataHandling\FileInputDataSource.h" />
+    <ClInclude Include="src\InputDataHandling\IInputDataSource.h" />
+    <ClInclude Include="src\InputDataHandling\MockInputDataSource.h" />
+    <ClInclude Include="src\InputDataHandling\NamedStream.h" />
+    <ClInclude Include="src\Logging\ConsoleLogger.h" />
+    <ClInclude Include="src\Logging\Logger.h" />
+    <ClInclude Include="src\SearchTermsHandling\ISearchTermsBuilder.h" />
+    <ClInclude Include="src\SearchTermsHandling\SearchTermsBuilderFromMockData.h" />
+    <ClInclude Include="src\SearchTermsHandling\SearchTermsBuilderFromStream.h" />
+    <ClInclude Include="src\StreamSearch\SearchNode.h" />
+    <ClInclude Include="src\StreamSearch\StreamSearcher.h" />
+    <ClInclude Include="src\Utils\DateTime.h" />
+    <ClInclude Include="src\Utils\Timer.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -142,36 +172,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="ArgumentProcessor.cpp" />
-    <ClCompile Include="ConsoleLogger.cpp" />
-    <ClCompile Include="FileInputDataSource.cpp" />
-    <ClCompile Include="Logger.cpp" />
-    <ClCompile Include="MockInputDataSource.cpp" />
-    <ClCompile Include="SearchNode.cpp" />
-    <ClCompile Include="SearchTermsBuilderFromMockData.cpp" />
-    <ClCompile Include="SearchTermsBuilderFromStream.cpp" />
-    <ClCompile Include="StreamSearcher.cpp" />
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Timer.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="ArgumentProcessor.h" />
-    <ClInclude Include="ConsoleLogger.h" />
-    <ClInclude Include="DateTime.h" />
-    <ClInclude Include="FileInputDataSource.h" />
-    <ClInclude Include="IInputDataSource.h" />
-    <ClInclude Include="Logger.h" />
-    <ClInclude Include="ISearchTermsBuilder.h" />
-    <ClInclude Include="InputArguments.h" />
-    <ClInclude Include="MockInputDataSource.h" />
-    <ClInclude Include="NamedStream.h" />
-    <ClInclude Include="SearchNode.h" />
-    <ClInclude Include="SearchTermsBuilderFromMockData.h" />
-    <ClInclude Include="SearchTermsBuilderFromStream.h" />
-    <ClInclude Include="StreamSearcher.h" />
-    <ClInclude Include="Timer.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

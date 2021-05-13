@@ -1,5 +1,5 @@
 #include "StreamSearcher.h"
-#include "Logger.h"
+#include "../Logging/Logger.h"
 #include "SearchNode.h"
 
 #include <algorithm>

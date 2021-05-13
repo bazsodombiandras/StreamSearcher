@@ -1,5 +1,5 @@
 #include "ArgumentProcessor.h"
-#include "Logger.h"
+#include "../Logging/Logger.h"
 
 #include <filesystem>
 #include <stdexcept>

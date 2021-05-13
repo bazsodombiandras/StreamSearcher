@@ -1,103 +1,108 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="InputArgumentsHandling">
+    <Filter Include="src">
+      <UniqueIdentifier>{c12508c6-cedd-4890-a604-1b1431efb49f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\InputArgumentsHandling">
       <UniqueIdentifier>{5aec0cb9-7831-4eba-aa8f-22eac4636161}</UniqueIdentifier>
     </Filter>
-    <Filter Include="StreamSearch">
-      <UniqueIdentifier>{b6e3152f-b55a-4976-9bb2-1537e42b73d9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SearchTermsHandling">
-      <UniqueIdentifier>{90a8273d-ca1f-4d8a-8e60-5f528b398402}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="InputDataHandling">
+    <Filter Include="src\InputDataHandling">
       <UniqueIdentifier>{26b0bc0c-5fab-4d53-a319-1614542584b9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Utils">
-      <UniqueIdentifier>{82367364-05f0-45ba-a44f-7bf3f2f79629}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Logging">
+    <Filter Include="src\Logging">
       <UniqueIdentifier>{506e49eb-8721-4bc8-b82a-85777f7374fa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Utils">
+      <UniqueIdentifier>{82367364-05f0-45ba-a44f-7bf3f2f79629}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\StreamSearch">
+      <UniqueIdentifier>{b6e3152f-b55a-4976-9bb2-1537e42b73d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\SearchTermsHandling">
+      <UniqueIdentifier>{90a8273d-ca1f-4d8a-8e60-5f528b398402}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ArgumentProcessor.cpp">
-      <Filter>InputArgumentsHandling</Filter>
+    <ClCompile Include="src\InputArgumentsHandling\ArgumentProcessor.cpp">
+      <Filter>src\InputArgumentsHandling</Filter>
     </ClCompile>
-    <ClCompile Include="SearchTermsBuilderFromStream.cpp">
-      <Filter>SearchTermsHandling</Filter>
+    <ClCompile Include="src\Main.cpp">
+      <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="StreamSearcher.cpp">
-      <Filter>StreamSearch</Filter>
+    <ClCompile Include="src\InputDataHandling\FileInputDataSource.cpp">
+      <Filter>src\InputDataHandling</Filter>
     </ClCompile>
-    <ClCompile Include="SearchNode.cpp">
-      <Filter>StreamSearch</Filter>
+    <ClCompile Include="src\InputDataHandling\MockInputDataSource.cpp">
+      <Filter>src\InputDataHandling</Filter>
     </ClCompile>
-    <ClCompile Include="SearchTermsBuilderFromMockData.cpp">
-      <Filter>SearchTermsHandling</Filter>
+    <ClCompile Include="src\Logging\ConsoleLogger.cpp">
+      <Filter>src\Logging</Filter>
     </ClCompile>
-    <ClCompile Include="FileInputDataSource.cpp">
-      <Filter>InputDataHandling</Filter>
+    <ClCompile Include="src\Logging\Logger.cpp">
+      <Filter>src\Logging</Filter>
     </ClCompile>
-    <ClCompile Include="MockInputDataSource.cpp">
-      <Filter>InputDataHandling</Filter>
+    <ClCompile Include="src\SearchTermsHandling\SearchTermsBuilderFromMockData.cpp">
+      <Filter>src\SearchTermsHandling</Filter>
     </ClCompile>
-    <ClCompile Include="Timer.cpp">
-      <Filter>Utils</Filter>
+    <ClCompile Include="src\SearchTermsHandling\SearchTermsBuilderFromStream.cpp">
+      <Filter>src\SearchTermsHandling</Filter>
     </ClCompile>
-    <ClCompile Include="Logger.cpp">
-      <Filter>Logging</Filter>
+    <ClCompile Include="src\StreamSearch\SearchNode.cpp">
+      <Filter>src\StreamSearch</Filter>
     </ClCompile>
-    <ClCompile Include="ConsoleLogger.cpp">
-      <Filter>Logging</Filter>
+    <ClCompile Include="src\StreamSearch\StreamSearcher.cpp">
+      <Filter>src\StreamSearch</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Utils\Timer.cpp">
+      <Filter>src\Utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ArgumentProcessor.h">
-      <Filter>InputArgumentsHandling</Filter>
+    <ClInclude Include="src\InputArgumentsHandling\ArgumentProcessor.h">
+      <Filter>src\InputArgumentsHandling</Filter>
     </ClInclude>
-    <ClInclude Include="ISearchTermsBuilder.h">
-      <Filter>SearchTermsHandling</Filter>
+    <ClInclude Include="src\InputArgumentsHandling\InputArguments.h">
+      <Filter>src\InputArgumentsHandling</Filter>
     </ClInclude>
-    <ClInclude Include="SearchTermsBuilderFromStream.h">
-      <Filter>SearchTermsHandling</Filter>
+    <ClInclude Include="src\InputDataHandling\FileInputDataSource.h">
+      <Filter>src\InputDataHandling</Filter>
     </ClInclude>
-    <ClInclude Include="InputArguments.h">
-      <Filter>InputArgumentsHandling</Filter>
+    <ClInclude Include="src\InputDataHandling\IInputDataSource.h">
+      <Filter>src\InputDataHandling</Filter>
     </ClInclude>
-    <ClInclude Include="StreamSearcher.h">
-      <Filter>StreamSearch</Filter>
+    <ClInclude Include="src\InputDataHandling\MockInputDataSource.h">
+      <Filter>src\InputDataHandling</Filter>
     </ClInclude>
-    <ClInclude Include="SearchNode.h">
-      <Filter>StreamSearch</Filter>
+    <ClInclude Include="src\InputDataHandling\NamedStream.h">
+      <Filter>src\InputDataHandling</Filter>
     </ClInclude>
-    <ClInclude Include="SearchTermsBuilderFromMockData.h">
-      <Filter>SearchTermsHandling</Filter>
+    <ClInclude Include="src\Logging\ConsoleLogger.h">
+      <Filter>src\Logging</Filter>
     </ClInclude>
-    <ClInclude Include="IInputDataSource.h">
-      <Filter>InputDataHandling</Filter>
+    <ClInclude Include="src\Logging\Logger.h">
+      <Filter>src\Logging</Filter>
     </ClInclude>
-    <ClInclude Include="FileInputDataSource.h">
-      <Filter>InputDataHandling</Filter>
+    <ClInclude Include="src\SearchTermsHandling\ISearchTermsBuilder.h">
+      <Filter>src\SearchTermsHandling</Filter>
     </ClInclude>
-    <ClInclude Include="MockInputDataSource.h">
-      <Filter>InputDataHandling</Filter>
+    <ClInclude Include="src\SearchTermsHandling\SearchTermsBuilderFromMockData.h">
+      <Filter>src\SearchTermsHandling</Filter>
     </ClInclude>
-    <ClInclude Include="NamedStream.h">
-      <Filter>InputDataHandling</Filter>
+    <ClInclude Include="src\SearchTermsHandling\SearchTermsBuilderFromStream.h">
+      <Filter>src\SearchTermsHandling</Filter>
     </ClInclude>
-    <ClInclude Include="Timer.h">
-      <Filter>Utils</Filter>
+    <ClInclude Include="src\StreamSearch\SearchNode.h">
+      <Filter>src\StreamSearch</Filter>
     </ClInclude>
-    <ClInclude Include="DateTime.h">
-      <Filter>Utils</Filter>
+    <ClInclude Include="src\StreamSearch\StreamSearcher.h">
+      <Filter>src\StreamSearch</Filter>
     </ClInclude>
-    <ClInclude Include="Logger.h">
-      <Filter>Logging</Filter>
+    <ClInclude Include="src\Utils\DateTime.h">
+      <Filter>src\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="ConsoleLogger.h">
-      <Filter>Logging</Filter>
+    <ClInclude Include="src\Utils\Timer.h">
+      <Filter>src\Utils</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "InputArguments.h"
+#include "../InputArgumentsHandling/InputArguments.h"
 
 using namespace std;
 

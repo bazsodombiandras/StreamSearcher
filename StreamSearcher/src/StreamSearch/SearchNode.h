@@ -35,7 +35,7 @@ namespace StreamSearch
 		/// <summary>
 		/// Owned collection of child nodes.
 		/// </summary>
-		vector<unique_ptr<SearchNode>> children;
+		unique_ptr<SearchNode> children[UCHAR_MAX];
 
 		/// <summary>
 		/// Is this search node a search term terminator?
@@ -43,6 +43,8 @@ namespace StreamSearch
 		// Example: "app" is matched but there is a not yet macthed search term "apple" on the same branch in the search tree.
 		/// </summary>
 		bool isSearchTermTerminator;
+
+		bool isEmpty;
 
 		/// <summary>
 		/// Search node copying through the copy constructor is disabled.

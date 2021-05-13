@@ -1,5 +1,5 @@
 #include "Timer.h"
-#include "Logger.h"
+#include "../Logging/Logger.h"
 
 using namespace Logging;
 using namespace Utils;
