@@ -1,5 +1,7 @@
 #pragma once
 
+#include "ISearchTermsBuilder.h"
+
 #include <set>
 #include <string>
 
@@ -7,15 +9,15 @@ using namespace std;
 
 namespace SearchTermsHandling
 {
-	class SearchTermsBuilderFromMockData
+	class SearchTermsBuilderFromMockData: public ISearchTermsBuilder
 	{
 	private:
 		set<string> searchTerms;
 
 	public:
-		virtual set<string> Build();
+		set<string> Build() override;
 
-		virtual SearchTermsBuilderFromMockData& operator<< (const string& searchTerm);
+		SearchTermsBuilderFromMockData& operator<< (const string& searchTerm);
 	};
 }
 

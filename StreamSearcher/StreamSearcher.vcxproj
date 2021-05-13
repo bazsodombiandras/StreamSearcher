@@ -142,20 +142,28 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ArgumentProcessor.cpp" />
+    <ClCompile Include="FileInputDataSource.cpp" />
+    <ClCompile Include="MockInputDataSource.cpp" />
     <ClCompile Include="SearchNode.cpp" />
     <ClCompile Include="SearchTermsBuilderFromMockData.cpp" />
     <ClCompile Include="SearchTermsBuilderFromStream.cpp" />
     <ClCompile Include="StreamSearcher.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ArgumentProcessor.h" />
+    <ClInclude Include="FileInputDataSource.h" />
+    <ClInclude Include="IInputDataSource.h" />
     <ClInclude Include="ISearchTermsBuilder.h" />
     <ClInclude Include="InputArguments.h" />
+    <ClInclude Include="MockInputDataSource.h" />
+    <ClInclude Include="NamedStream.h" />
     <ClInclude Include="SearchNode.h" />
     <ClInclude Include="SearchTermsBuilderFromMockData.h" />
     <ClInclude Include="SearchTermsBuilderFromStream.h" />
     <ClInclude Include="StreamSearcher.h" />
+    <ClInclude Include="Timer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

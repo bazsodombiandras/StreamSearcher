@@ -25,7 +25,7 @@ namespace SearchTermsHandling
 
 		virtual ~SearchTermsBuilderFromStream() = default;
 
-		virtual set<string> Build();
+		set<string> Build() override;
 
 		virtual SearchTermsBuilderFromStream& operator= (const SearchTermsBuilderFromStream&) = default;
 		virtual SearchTermsBuilderFromStream& operator= (SearchTermsBuilderFromStream&&) = default;

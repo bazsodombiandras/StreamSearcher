@@ -10,6 +10,12 @@
     <Filter Include="SearchTermsHandling">
       <UniqueIdentifier>{90a8273d-ca1f-4d8a-8e60-5f528b398402}</UniqueIdentifier>
     </Filter>
+    <Filter Include="InputDataHandling">
+      <UniqueIdentifier>{26b0bc0c-5fab-4d53-a319-1614542584b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{82367364-05f0-45ba-a44f-7bf3f2f79629}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ArgumentProcessor.cpp">
@@ -27,6 +33,15 @@
     </ClCompile>
     <ClCompile Include="SearchTermsBuilderFromMockData.cpp">
       <Filter>SearchTermsHandling</Filter>
+    </ClCompile>
+    <ClCompile Include="FileInputDataSource.cpp">
+      <Filter>InputDataHandling</Filter>
+    </ClCompile>
+    <ClCompile Include="MockInputDataSource.cpp">
+      <Filter>InputDataHandling</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>Utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -50,6 +65,21 @@
     </ClInclude>
     <ClInclude Include="SearchTermsBuilderFromMockData.h">
       <Filter>SearchTermsHandling</Filter>
+    </ClInclude>
+    <ClInclude Include="IInputDataSource.h">
+      <Filter>InputDataHandling</Filter>
+    </ClInclude>
+    <ClInclude Include="FileInputDataSource.h">
+      <Filter>InputDataHandling</Filter>
+    </ClInclude>
+    <ClInclude Include="MockInputDataSource.h">
+      <Filter>InputDataHandling</Filter>
+    </ClInclude>
+    <ClInclude Include="NamedStream.h">
+      <Filter>InputDataHandling</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>Utils</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,8 +1,11 @@
 #pragma once
 
+#include "IInputDataSource.h"
+
 #include <istream>
 #include <set>
 
+using namespace InputDataHandling;
 using namespace std;
 
 namespace StreamSearch
@@ -15,6 +18,8 @@ namespace StreamSearch
 
 		StreamSearcher() = delete;
 
+		void SearchStream(istream& inputStream);
+
 	public:
 		static const size_t InputStreamBufferSize;
 
@@ -25,7 +30,7 @@ namespace StreamSearch
 
 		const set<string>& GetResults() const;
 
-		void SearchStream(istream& inputStream);
+		void SearchStream(IInputDataSource& inputDataSource);
 
 		StreamSearcher& operator= (const StreamSearcher&) = default;
 		StreamSearcher& operator= (StreamSearcher&&) = default;

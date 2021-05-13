@@ -1,24 +1,13 @@
 #include "StreamSearcher.h"
 #include "SearchNode.h"
 
-#include<algorithm>
+#include <algorithm>
+#include <iostream>
 #include <memory>
 
-#include<iostream>
-
+using namespace InputDataHandling;
 using namespace StreamSearch;
 using namespace std;
-
-StreamSearcher::StreamSearcher(const set<string>& searchTerms) :
-	searchTerms(searchTerms),
-	results()
-{
-}
-
-const set<string>& StreamSearcher::GetResults() const
-{
-	return this->results;
-}
 
 void StreamSearcher::SearchStream(istream& inputStream)
 {
@@ -89,7 +78,7 @@ void StreamSearcher::SearchStream(istream& inputStream)
 					}
 				),
 				end(activeSearchNodes)
-			);
+						);
 
 			set<SearchNode*> erasedSearchNodes;
 
@@ -115,7 +104,38 @@ void StreamSearcher::SearchStream(istream& inputStream)
 					}
 				),
 				end(activeSearchNodes)
-			);
+						);
 		}
 	);
+}
+
+StreamSearcher::StreamSearcher(const set<string>& searchTerms) :
+	searchTerms(searchTerms),
+	results()
+{
+}
+
+const set<string>& StreamSearcher::GetResults() const
+{
+	return this->results;
+}
+
+void StreamSearcher::SearchStream(IInputDataSource& inputDataSource)
+{
+	cout << "------------------------------" << endl << endl;
+	cout << "Searching for terms in input data streams..." << endl << endl;
+
+	while (inputDataSource)
+	{
+		NamedInputStream inputDataStream = inputDataSource.GetNextInputStream();
+		this->SearchStream(*inputDataStream.stream);
+
+		set<string> foundSearchTerms = this->GetResults();
+		if (!foundSearchTerms.empty())
+		{
+			cout << inputDataStream.name << ": " << endl;
+			copy(begin(foundSearchTerms), end(foundSearchTerms), ostream_iterator<string>(cout, "\n"));
+			cout << endl;
+		}
+	}
 }

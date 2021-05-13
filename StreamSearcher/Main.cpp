@@ -1,33 +1,35 @@
 #include "ArgumentProcessor.h"
+#include "FileInputDataSource.h"
+#include "MockInputDataSource.h"
 #include "SearchTermsBuilderFromMockData.h"
 #include "SearchTermsBuilderFromStream.h"
 #include "StreamSearcher.h"
+#include "Timer.h"
 
-#include <chrono>
-#include <filesystem>
 #include <fstream>
 #include <iostream>
 
 using namespace InputArgumentsHandling;
 using namespace SearchTermsHandling;
 using namespace StreamSearch;
+using namespace Utils;
 using namespace std;
+
+#define MOCKDATA
 
 int main(int argc, char* argv[])
 {
     try
     {
-        auto startTime = std::chrono::system_clock::now();
-
         InputArguments inputArgs = ArgumentProcessor::InterpretArguments(argc, argv);
 
+#if defined MOCKDATA
         SearchTermsBuilderFromMockData searchTermsRegistryBuilder;
         searchTermsRegistryBuilder << "apple" << "orange" << "bear";
-
-        /*
-        ifstream inputDataFileStream(inputData.searchTermsFile);
+#else
+        ifstream inputDataFileStream(inputArgs.searchTermsFile);
         SearchTermsBuilderFromStream searchTermsRegistryBuilder(inputDataFileStream);
-        */
+#endif
 
         set<string> searchTerms = searchTermsRegistryBuilder.Build();
 
@@ -35,40 +37,18 @@ int main(int argc, char* argv[])
         copy(begin(searchTerms), end(searchTerms), ostream_iterator<string>(cout, "\n"));
         cout << endl;
 
-        cout << "------------------------------" << endl << endl;
-        cout << "Searching for terms in data files..." << endl << endl;
+#if defined MOCKDATA
+        MockInputDataSource inputDataSource;
+        inputDataSource << make_pair("MockData-1", "The pineapple is tasty. This burden is unbearable.");
+#else
+        FileInputDataSource inputDataSource(inputArgs.dataFiles);
+#endif
 
-        StreamSearcher streamSearcher(searchTerms);
-
-        stringstream mockDataStream("The pineapple is tasty. This burden is unbearable.");
-        streamSearcher.SearchStream(mockDataStream);
-
-        set<string> foundSearchTerms = streamSearcher.GetResults();
-        if (!foundSearchTerms.empty())
         {
-            cout << "Mock data: " << endl;
-            copy(begin(foundSearchTerms), end(foundSearchTerms), ostream_iterator<string>(cout, "\n"));
-            cout << endl;
+            Timer t;
+            StreamSearcher streamSearcher(searchTerms);
+            streamSearcher.SearchStream(inputDataSource);
         }
-
-        /*
-        for (string inputDataFile : inputData.dataFiles)
-        {
-            ifstream inputDataStream(inputDataFile);
-            streamSearcher.SearchStream(inputDataStream);
-            set<string> foundSearchTerms = streamSearcher.GetResults();
-            if (!foundSearchTerms.empty())
-            {
-                cout << filesystem::path(inputDataFile).filename().string() << ": " << endl;
-                copy(begin(foundSearchTerms), end(foundSearchTerms), ostream_iterator<string>(cout, "\n"));
-                cout << endl;
-            }
-        }
-        */
-
-        auto endTime = std::chrono::system_clock::now();
-        auto elapsedTime = endTime - startTime;
-        std::cout << "Elapsed time: " << chrono::duration_cast<chrono::milliseconds>(elapsedTime).count() / 1000.0 << " seconds." << endl;
     }
     catch (exception ex)
     {
