@@ -9,7 +9,7 @@ using namespace InputArgumentsHandling;
 using namespace Logging;
 using namespace std;
 
-void ArgumentProcessor::DisplayUsage(const string& appName)
+void ArgumentProcessor::DisplayUsageInstructions(const string& appName)
 {
 	Logger::Info("Usage:");
 	Logger::Info(appName + " " + "SearchTermsFile DataFile1 ... DataFileN");
@@ -19,7 +19,7 @@ InputArguments ArgumentProcessor::InterpretArguments(int argc, char* argv[])
 {
 	if (argc < 3)
 	{
-		DisplayUsage(filesystem::path(argv[0]).filename().string());
+		DisplayUsageInstructions(filesystem::path(argv[0]).filename().string());
 		throw std::invalid_argument("There should be at least 2 command line argument specified (one search terms file and at least one data file).");
 	}
 

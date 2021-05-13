@@ -5,7 +5,9 @@
 using namespace SearchTermsHandling;
 using namespace std;
 
-const size_t SearchTermsBuilderFromStream::MaxSearchTermSize = 4096;
+// Let's assume that all search terms are not longer than the below number of characters.
+// This limitation is imposed by the std::istream::geline() implementation.
+const size_t SearchTermsBuilderFromStream::MaxSearchTermLength = 4096;
 
 SearchTermsBuilderFromStream::SearchTermsBuilderFromStream(istream& inputStream):
 	inputStream(inputStream)
@@ -16,8 +18,9 @@ set<string> SearchTermsBuilderFromStream::Build()
 {
 	set<string> searchTerms;
 
-	char searchTerm[MaxSearchTermSize];
-	while (this->inputStream.getline(searchTerm, MaxSearchTermSize))
+	// Read the search terms from the input streama nd add them to the search terms collection.
+	char searchTerm[MaxSearchTermLength];
+	while (this->inputStream.getline(searchTerm, MaxSearchTermLength))
 	{
 		searchTerms.insert(searchTerm);
 	}

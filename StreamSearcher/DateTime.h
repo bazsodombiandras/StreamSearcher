@@ -7,10 +7,18 @@ using namespace std;
 
 namespace Utils
 {
+	/// <summary>
+	/// Utilities related to date and time.
+	/// </summary>
 	class DateTime
 	{
 	public:
-		static string GetCurrent(string format = "%d-%m-%Y %H:%M:%S")
+		/// <summary>
+		/// Gets the current date and time as a string formatted according to a given pattern.
+		/// </summary>
+		/// <param name="format">The format pattern.</param>
+		/// <returns>the current date and time formatted according to the specified pattern.</returns>
+		static string GetCurrentAsString(string format = "%d-%m-%Y %H:%M:%S")
 		{
 			time_t rawTime;
 			struct tm timeInfo;

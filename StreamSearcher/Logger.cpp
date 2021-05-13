@@ -13,11 +13,11 @@ string Logger::MessageTypeToString(MsgType messageType)
 {
 	switch (messageType)
 	{
-	case MsgType::Error: return "ERR";
-	case MsgType::Warning: return "WRN";
-	case MsgType::Info: return "INF";
-	case MsgType::Debug: return "DBG";
-	default: return "";
+		case MsgType::Error: return "ERR";
+		case MsgType::Warning: return "WRN";
+		case MsgType::Info: return "INF";
+		case MsgType::Debug: return "DBG";
+		default: return "";
 	}
 }
 
@@ -38,7 +38,7 @@ void Logger::Message(const string& message, MsgType messageType)
 
 			if (instance->includeTimestamp)
 			{
-				msgStream << "[" << DateTime::GetCurrent() << "] ";
+				msgStream << "[" << DateTime::GetCurrentAsString() << "] ";
 			}
 
 			if (instance->includeMessageType)
