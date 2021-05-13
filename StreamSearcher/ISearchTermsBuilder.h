@@ -5,7 +5,7 @@
 
 using namespace std;
 
-namespace SearchTerms
+namespace SearchTermsHandling
 {
 	class ISearchTermsBuilder
 	{

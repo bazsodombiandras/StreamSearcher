@@ -5,9 +5,9 @@
 
 using namespace std;
 
-namespace InputDataHandling
+namespace InputArgumentsHandling
 {
-	class InputData
+	class InputArguments
 	{
 	public:
 		string searchTermsFile;

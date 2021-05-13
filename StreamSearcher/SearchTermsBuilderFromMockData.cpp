@@ -1,6 +1,6 @@
 #include "SearchTermsBuilderFromMockData.h"
 
-using namespace SearchTerms;
+using namespace SearchTermsHandling;
 
 set<string> SearchTermsBuilderFromMockData::Build()
 {

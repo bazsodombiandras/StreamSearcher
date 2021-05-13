@@ -151,7 +151,7 @@
   <ItemGroup>
     <ClInclude Include="ArgumentProcessor.h" />
     <ClInclude Include="ISearchTermsBuilder.h" />
-    <ClInclude Include="InputData.h" />
+    <ClInclude Include="InputArguments.h" />
     <ClInclude Include="SearchNode.h" />
     <ClInclude Include="SearchTermsBuilderFromMockData.h" />
     <ClInclude Include="SearchTermsBuilderFromStream.h" />

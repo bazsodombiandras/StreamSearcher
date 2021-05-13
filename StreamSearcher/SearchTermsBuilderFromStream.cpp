@@ -3,7 +3,7 @@
 #include <fstream>
 #include <iostream>
 
-using namespace SearchTerms;
+using namespace SearchTermsHandling;
 using namespace std;
 
 const size_t SearchTermsBuilderFromStream::MaxSearchTermSize = 4096;

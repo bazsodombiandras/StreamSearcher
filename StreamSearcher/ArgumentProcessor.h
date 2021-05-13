@@ -1,10 +1,10 @@
 #pragma once
 
-#include "InputData.h"
+#include "InputArguments.h"
 
 using namespace std;
 
-namespace InputDataHandling
+namespace InputArgumentsHandling
 {
 	class ArgumentProcessor
 	{
@@ -12,6 +12,6 @@ namespace InputDataHandling
 		static void DisplayUsage(const string& appName);
 
 	public:
-		static InputData InterpretArguments(int argc, char* argv[]);
+		static InputArguments InterpretArguments(int argc, char* argv[]);
 	};
 }

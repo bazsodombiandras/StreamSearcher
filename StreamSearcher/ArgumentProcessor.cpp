@@ -5,7 +5,7 @@
 #include <stdexcept>
 #include <string>
 
-using namespace InputDataHandling;
+using namespace InputArgumentsHandling;
 using namespace std;
 
 void ArgumentProcessor::DisplayUsage(const string& appName)
@@ -15,7 +15,7 @@ void ArgumentProcessor::DisplayUsage(const string& appName)
 	cout << endl;
 }
 
-InputData ArgumentProcessor::InterpretArguments(int argc, char* argv[])
+InputArguments ArgumentProcessor::InterpretArguments(int argc, char* argv[])
 {
 	if (argc < 3)
 	{
@@ -23,9 +23,16 @@ InputData ArgumentProcessor::InterpretArguments(int argc, char* argv[])
 		throw std::invalid_argument("There should be at least 2 command line argument specified (one search terms file and at least one data file).");
 	}
 
-	return InputData
+	InputArguments inputArgs
 	{
 		argv[1],
 		vector<string>(argv + 2, argv + argc),
 	};
+
+	cout << "Input argument search terms file: " << endl << inputArgs.searchTermsFile << endl << endl;
+	cout << "Input argument data files: " << endl;
+	copy(begin(inputArgs.dataFiles), end(inputArgs.dataFiles), ostream_iterator<string>(cout, "\n"));
+	cout << endl;
+
+	return inputArgs;
 }

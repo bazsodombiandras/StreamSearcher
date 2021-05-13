@@ -1,55 +1,55 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="InputHandling">
+    <Filter Include="InputArgumentsHandling">
       <UniqueIdentifier>{5aec0cb9-7831-4eba-aa8f-22eac4636161}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SearchTerms">
-      <UniqueIdentifier>{90a8273d-ca1f-4d8a-8e60-5f528b398402}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Search">
+    <Filter Include="StreamSearch">
       <UniqueIdentifier>{b6e3152f-b55a-4976-9bb2-1537e42b73d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SearchTermsHandling">
+      <UniqueIdentifier>{90a8273d-ca1f-4d8a-8e60-5f528b398402}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ArgumentProcessor.cpp">
-      <Filter>InputHandling</Filter>
+      <Filter>InputArgumentsHandling</Filter>
     </ClCompile>
     <ClCompile Include="SearchTermsBuilderFromStream.cpp">
-      <Filter>SearchTerms</Filter>
+      <Filter>SearchTermsHandling</Filter>
     </ClCompile>
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="StreamSearcher.cpp">
-      <Filter>Search</Filter>
+      <Filter>StreamSearch</Filter>
     </ClCompile>
     <ClCompile Include="SearchNode.cpp">
-      <Filter>Search</Filter>
+      <Filter>StreamSearch</Filter>
     </ClCompile>
     <ClCompile Include="SearchTermsBuilderFromMockData.cpp">
-      <Filter>SearchTerms</Filter>
+      <Filter>SearchTermsHandling</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ArgumentProcessor.h">
-      <Filter>InputHandling</Filter>
+      <Filter>InputArgumentsHandling</Filter>
     </ClInclude>
     <ClInclude Include="ISearchTermsBuilder.h">
-      <Filter>SearchTerms</Filter>
+      <Filter>SearchTermsHandling</Filter>
     </ClInclude>
     <ClInclude Include="SearchTermsBuilderFromStream.h">
-      <Filter>SearchTerms</Filter>
+      <Filter>SearchTermsHandling</Filter>
     </ClInclude>
-    <ClInclude Include="InputData.h">
-      <Filter>InputHandling</Filter>
+    <ClInclude Include="InputArguments.h">
+      <Filter>InputArgumentsHandling</Filter>
     </ClInclude>
     <ClInclude Include="StreamSearcher.h">
-      <Filter>Search</Filter>
+      <Filter>StreamSearch</Filter>
     </ClInclude>
     <ClInclude Include="SearchNode.h">
-      <Filter>Search</Filter>
+      <Filter>StreamSearch</Filter>
     </ClInclude>
     <ClInclude Include="SearchTermsBuilderFromMockData.h">
-      <Filter>SearchTerms</Filter>
+      <Filter>SearchTermsHandling</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

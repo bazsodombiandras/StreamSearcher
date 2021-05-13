@@ -8,8 +8,8 @@
 #include <fstream>
 #include <iostream>
 
-using namespace InputDataHandling;
-using namespace SearchTerms;
+using namespace InputArgumentsHandling;
+using namespace SearchTermsHandling;
 using namespace StreamSearch;
 using namespace std;
 
@@ -19,20 +19,15 @@ int main(int argc, char* argv[])
     {
         auto startTime = std::chrono::system_clock::now();
 
-        InputData inputData = ArgumentProcessor::InterpretArguments(argc, argv);
+        InputArguments inputArgs = ArgumentProcessor::InterpretArguments(argc, argv);
 
-        cout << "Search terms file: " << endl << inputData.searchTermsFile << endl << endl;
-        cout << "Data files: " << endl;
-        copy(begin(inputData.dataFiles), end(inputData.dataFiles), ostream_iterator<string>(cout, "\n"));
-        cout << endl;
-
-        /*
         SearchTermsBuilderFromMockData searchTermsRegistryBuilder;
         searchTermsRegistryBuilder << "apple" << "orange" << "bear";
-        */
 
+        /*
         ifstream inputDataFileStream(inputData.searchTermsFile);
         SearchTermsBuilderFromStream searchTermsRegistryBuilder(inputDataFileStream);
+        */
 
         set<string> searchTerms = searchTermsRegistryBuilder.Build();
 
@@ -45,6 +40,18 @@ int main(int argc, char* argv[])
 
         StreamSearcher streamSearcher(searchTerms);
 
+        stringstream mockDataStream("The pineapple is tasty. This burden is unbearable.");
+        streamSearcher.SearchStream(mockDataStream);
+
+        set<string> foundSearchTerms = streamSearcher.GetResults();
+        if (!foundSearchTerms.empty())
+        {
+            cout << "Mock data: " << endl;
+            copy(begin(foundSearchTerms), end(foundSearchTerms), ostream_iterator<string>(cout, "\n"));
+            cout << endl;
+        }
+
+        /*
         for (string inputDataFile : inputData.dataFiles)
         {
             ifstream inputDataStream(inputDataFile);
@@ -57,6 +64,7 @@ int main(int argc, char* argv[])
                 cout << endl;
             }
         }
+        */
 
         auto endTime = std::chrono::system_clock::now();
         auto elapsedTime = endTime - startTime;
