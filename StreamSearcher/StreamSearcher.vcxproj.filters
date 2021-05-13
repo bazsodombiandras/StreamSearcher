@@ -25,6 +25,9 @@
     <ClCompile Include="SearchNode.cpp">
       <Filter>Search</Filter>
     </ClCompile>
+    <ClCompile Include="SearchTermsBuilderFromMockData.cpp">
+      <Filter>SearchTerms</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ArgumentProcessor.h">
@@ -44,6 +47,9 @@
     </ClInclude>
     <ClInclude Include="SearchNode.h">
       <Filter>Search</Filter>
+    </ClInclude>
+    <ClInclude Include="SearchTermsBuilderFromMockData.h">
+      <Filter>SearchTerms</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

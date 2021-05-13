@@ -13,14 +13,15 @@ SearchTermsBuilderFromStream::SearchTermsBuilderFromStream(istream& inputStream)
 {
 }
 
-void SearchTermsBuilderFromStream::Build(set<string>& searchTerms)
+set<string> SearchTermsBuilderFromStream::Build()
 {
+	set<string> searchTerms;
+
 	char searchTerm[MaxSearchTermSize];
-
-	searchTerms.clear();
-
 	while (this->inputStream.getline(searchTerm, MaxSearchTermSize))
 	{
 		searchTerms.insert(searchTerm);
 	}
+
+	return searchTerms;
 }

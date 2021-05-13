@@ -1,4 +1,5 @@
 #include "ArgumentProcessor.h"
+#include "SearchTermsBuilderFromMockData.h"
 #include "SearchTermsBuilderFromStream.h"
 #include "StreamSearcher.h"
 
@@ -25,10 +26,15 @@ int main(int argc, char* argv[])
         copy(begin(inputData.dataFiles), end(inputData.dataFiles), ostream_iterator<string>(cout, "\n"));
         cout << endl;
 
-        set<string> searchTerms;
+        /*
+        SearchTermsBuilderFromMockData searchTermsRegistryBuilder;
+        searchTermsRegistryBuilder << "apple" << "orange" << "bear";
+        */
+
         ifstream inputDataFileStream(inputData.searchTermsFile);
         SearchTermsBuilderFromStream searchTermsRegistryBuilder(inputDataFileStream);
-        searchTermsRegistryBuilder.Build(searchTerms);
+
+        set<string> searchTerms = searchTermsRegistryBuilder.Build();
 
         cout << "Search terms:" << endl;
         copy(begin(searchTerms), end(searchTerms), ostream_iterator<string>(cout, "\n"));
