@@ -1,11 +1,13 @@
 #include "StreamSearcher.h"
+#include "Logger.h"
 #include "SearchNode.h"
 
 #include <algorithm>
-#include <iostream>
+#include <sstream>
 #include <memory>
 
 using namespace InputDataHandling;
+using namespace Logging;
 using namespace StreamSearch;
 using namespace std;
 
@@ -109,7 +111,7 @@ void StreamSearcher::SearchStream(istream& inputStream)
 	);
 }
 
-StreamSearcher::StreamSearcher(const set<string>& searchTerms) :
+StreamSearcher::StreamSearcher(const set<string>& searchTerms):
 	searchTerms(searchTerms),
 	results()
 {
@@ -122,8 +124,7 @@ const set<string>& StreamSearcher::GetResults() const
 
 void StreamSearcher::SearchStream(IInputDataSource& inputDataSource)
 {
-	cout << "------------------------------" << endl << endl;
-	cout << "Searching for terms in input data streams..." << endl << endl;
+	Logger::Info("Searching for terms in input data streams...");
 
 	while (inputDataSource)
 	{
@@ -133,9 +134,10 @@ void StreamSearcher::SearchStream(IInputDataSource& inputDataSource)
 		set<string> foundSearchTerms = this->GetResults();
 		if (!foundSearchTerms.empty())
 		{
-			cout << inputDataStream.name << ": " << endl;
-			copy(begin(foundSearchTerms), end(foundSearchTerms), ostream_iterator<string>(cout, "\n"));
-			cout << endl;
+			Logger::Info(inputDataStream.name + ": ");
+			stringstream foundSearchTermsListStream;
+			copy(begin(foundSearchTerms), end(foundSearchTerms), ostream_iterator<string>(foundSearchTermsListStream, " "));
+			Logger::Info(foundSearchTermsListStream.str());
 		}
 	}
 }

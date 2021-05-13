@@ -1,15 +1,14 @@
 #include "ArgumentProcessor.h"
 #include "FileInputDataSource.h"
+#include "ConsoleLogger.h"
 #include "MockInputDataSource.h"
 #include "SearchTermsBuilderFromMockData.h"
 #include "SearchTermsBuilderFromStream.h"
 #include "StreamSearcher.h"
 #include "Timer.h"
 
-#include <fstream>
-#include <iostream>
-
 using namespace InputArgumentsHandling;
+using namespace Logging;
 using namespace SearchTermsHandling;
 using namespace StreamSearch;
 using namespace Utils;
@@ -19,9 +18,11 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
+    ConsoleLogger::Init(Logger::MsgType::Debug, true, true);
+
     try
     {
-        InputArguments inputArgs = ArgumentProcessor::InterpretArguments(argc, argv);
+        InputArguments inputArgs = ArgumentProcessor::InterpretArguments(argc, argv);        
 
 #if defined MOCKDATA
         SearchTermsBuilderFromMockData searchTermsRegistryBuilder;
@@ -33,9 +34,8 @@ int main(int argc, char* argv[])
 
         set<string> searchTerms = searchTermsRegistryBuilder.Build();
 
-        cout << "Search terms:" << endl;
-        copy(begin(searchTerms), end(searchTerms), ostream_iterator<string>(cout, "\n"));
-        cout << endl;
+        Logger::Debug("Search terms:");
+        for_each(begin(searchTerms), end(searchTerms), [](const string& searchTerm) { Logger::Debug(searchTerm); });
 
 #if defined MOCKDATA
         MockInputDataSource inputDataSource;
@@ -52,12 +52,12 @@ int main(int argc, char* argv[])
     }
     catch (exception ex)
     {
-        cerr << "Error: " << ex.what() << endl;
+        Logger::Error(ex.what());
         return 1;
     }
     catch (...)
     {
-        cerr << "Error: Unexpected eception encountered." << endl;
+        Logger::Error("Unexpected eception encountered.");
         return 2;
     }
 

@@ -8,7 +8,7 @@ using namespace std;
 
 namespace InputDataHandling
 {
-	class MockInputDataSource : public IInputDataSource
+	class MockInputDataSource: public IInputDataSource
 	{
 	private:
 		queue<pair<string, string>> inputData;

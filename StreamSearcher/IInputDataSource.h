@@ -11,6 +11,8 @@ namespace InputDataHandling
 	class IInputDataSource
 	{
 	public:
+		virtual ~IInputDataSource() = default;
+
 		virtual bool IsInputDataAvailable() const = 0;
 		virtual NamedInputStream GetNextInputStream() = 0;
 

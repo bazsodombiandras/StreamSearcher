@@ -8,7 +8,7 @@ using namespace std;
 
 namespace InputDataHandling
 {
-	class FileInputDataSource : public IInputDataSource
+	class FileInputDataSource: public IInputDataSource
 	{
 	private:
 		queue<string> inputFiles;

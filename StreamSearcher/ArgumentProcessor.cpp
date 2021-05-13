@@ -1,18 +1,18 @@
 #include "ArgumentProcessor.h"
+#include "Logger.h"
 
 #include <filesystem>
-#include <iostream>
 #include <stdexcept>
 #include <string>
 
 using namespace InputArgumentsHandling;
+using namespace Logging;
 using namespace std;
 
 void ArgumentProcessor::DisplayUsage(const string& appName)
 {
-	cout << "Usage:" << endl;
-	cout << appName << " " << "SearchTermsFile DataFile1 ... DataFileN" << endl;
-	cout << endl;
+	Logger::Info("Usage:");
+	Logger::Info(appName + " " + "SearchTermsFile DataFile1 ... DataFileN");
 }
 
 InputArguments ArgumentProcessor::InterpretArguments(int argc, char* argv[])
@@ -29,10 +29,11 @@ InputArguments ArgumentProcessor::InterpretArguments(int argc, char* argv[])
 		vector<string>(argv + 2, argv + argc),
 	};
 
-	cout << "Input argument search terms file: " << endl << inputArgs.searchTermsFile << endl << endl;
-	cout << "Input argument data files: " << endl;
-	copy(begin(inputArgs.dataFiles), end(inputArgs.dataFiles), ostream_iterator<string>(cout, "\n"));
-	cout << endl;
+	Logger::Debug("Input argument search terms file: \n" + inputArgs.searchTermsFile + "\n");
+	Logger::Debug("Input argument data files: ");
+	stringstream dataFilesListStream;
+	copy(begin(inputArgs.dataFiles), end(inputArgs.dataFiles), ostream_iterator<string>(dataFilesListStream, " "));
+	Logger::Debug(dataFilesListStream.str());
 
 	return inputArgs;
 }

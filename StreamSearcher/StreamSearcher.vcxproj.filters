@@ -16,6 +16,9 @@
     <Filter Include="Utils">
       <UniqueIdentifier>{82367364-05f0-45ba-a44f-7bf3f2f79629}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Logging">
+      <UniqueIdentifier>{506e49eb-8721-4bc8-b82a-85777f7374fa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ArgumentProcessor.cpp">
@@ -42,6 +45,12 @@
     </ClCompile>
     <ClCompile Include="Timer.cpp">
       <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Logger.cpp">
+      <Filter>Logging</Filter>
+    </ClCompile>
+    <ClCompile Include="ConsoleLogger.cpp">
+      <Filter>Logging</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -80,6 +89,15 @@
     </ClInclude>
     <ClInclude Include="Timer.h">
       <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="DateTime.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Logger.h">
+      <Filter>Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="ConsoleLogger.h">
+      <Filter>Logging</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

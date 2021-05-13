@@ -1,7 +1,7 @@
 #include "Timer.h"
+#include "Logger.h"
 
-#include <iostream>
-
+using namespace Logging;
 using namespace Utils;
 
 Timer::Timer()
@@ -17,7 +17,7 @@ Timer::~Timer()
 void Timer::DisplayElapsedTime() const
 {
 	auto endTime = chrono::system_clock::now();
-	std::cout << "Elapsed time: " << chrono::duration_cast<chrono::milliseconds>(endTime - this->startTime).count() / 1000.0 << " seconds." << endl;
+	Logger::Debug("Elapsed time: " + to_string(chrono::duration_cast<chrono::milliseconds>(endTime - this->startTime).count() / 1000.0) + " seconds.");
 }
 
 void Timer::Reset()

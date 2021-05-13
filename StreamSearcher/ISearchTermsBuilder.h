@@ -10,6 +10,8 @@ namespace SearchTermsHandling
 	class ISearchTermsBuilder
 	{
 	public:
+		virtual ~ISearchTermsBuilder() = default;
+
 		virtual set<string> Build() = 0;
 	};
 }

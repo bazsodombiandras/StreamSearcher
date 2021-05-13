@@ -1,14 +1,13 @@
 #include "SearchTermsBuilderFromStream.h"
 
 #include <fstream>
-#include <iostream>
 
 using namespace SearchTermsHandling;
 using namespace std;
 
 const size_t SearchTermsBuilderFromStream::MaxSearchTermSize = 4096;
 
-SearchTermsBuilderFromStream::SearchTermsBuilderFromStream(istream& inputStream) :
+SearchTermsBuilderFromStream::SearchTermsBuilderFromStream(istream& inputStream):
 	inputStream(inputStream)
 {
 }

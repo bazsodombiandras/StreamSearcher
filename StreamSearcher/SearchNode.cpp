@@ -8,7 +8,7 @@
 using namespace StreamSearch;
 using namespace std;
 
-SearchNode::SearchNode(const char character, SearchNode* parent) :
+SearchNode::SearchNode(const char character, SearchNode* parent):
 	character (character),
 	parent(parent),
 	children(),

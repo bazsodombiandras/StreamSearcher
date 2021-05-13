@@ -8,7 +8,7 @@ using namespace std;
 
 namespace SearchTermsHandling
 {
-	class SearchTermsBuilderFromStream : public ISearchTermsBuilder
+	class SearchTermsBuilderFromStream: public ISearchTermsBuilder
 	{
 	private:
 		static const size_t MaxSearchTermSize;
