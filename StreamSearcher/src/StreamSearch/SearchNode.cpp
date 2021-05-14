@@ -20,13 +20,13 @@ SearchNode* SearchNode::AddChildNode(const char c)
 {
 	if (!this->HasChildren())
 	{
-		this->children.resize(UCHAR_MAX);
-		fill(begin(this->children), end(this->children), nullptr);
+		this->children = make_unique<array<unique_ptr<SearchNode>, UCHAR_MAX + 1>>();
+		fill(begin(*this->children), end(*this->children), nullptr);
 	}
 
-	this->children[static_cast<unsigned char>(c)] = make_unique<SearchNode>(c, this);
+	this->children->at(static_cast<unsigned char>(c)) = make_unique<SearchNode>(c, this);
 
-	return this->children[static_cast<unsigned char>(c)].get();
+	return this->children->at(static_cast<unsigned char>(c)).get();
 }
 
 size_t SearchNode::GetNodeCount() const
@@ -34,8 +34,8 @@ size_t SearchNode::GetNodeCount() const
 	return this->HasChildren()
 		? accumulate
 		(
-			begin(this->children),
-			end(this->children),
+			begin(*this->children),
+			end(*this->children),
 			static_cast<size_t>(1),
 			[](size_t nodeCount, const auto& childNodePtr)
 			{
@@ -52,12 +52,12 @@ bool SearchNode::IsLeaf() const
 
 bool SearchNode::HasChildren() const
 {
-	return !this->children.empty();
+	return this->children != nullptr;
 }
 
 SearchNode* SearchNode::GetChild(const char c) const
 {
-	return this->HasChildren() ? this->children.at(static_cast<unsigned char>(c)).get() : nullptr;
+	return this->HasChildren() ? this->children->at(static_cast<unsigned char>(c)).get() : nullptr;
 }
 
 bool SearchNode::IsSearchTermTerminator() const
@@ -94,8 +94,8 @@ void SearchNode::EraseBranch(set<SearchNode*>* erasedNodes)
 	if (this->parent != nullptr)
 	{
 		SearchNode* parentPtr = this->parent;
-		parentPtr->children[static_cast<unsigned char>(this->character)] = nullptr;
-		if (all_of(begin(parentPtr->children), end(parentPtr->children), [](const auto& childNodePtr) { return !childNodePtr; }))
+		parentPtr->children->at(static_cast<unsigned char>(this->character)) = nullptr;
+		if (all_of(begin(*parentPtr->children), end(*parentPtr->children), [](const auto& childNodePtr) { return !childNodePtr; }))
 		{
 			parentPtr->EraseBranch(erasedNodes);
 		}

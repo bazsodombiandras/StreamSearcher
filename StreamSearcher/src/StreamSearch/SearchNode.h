@@ -1,9 +1,10 @@
 #pragma once
 
+#include <array>
+#include <climits>
 #include <memory>
-#include <string>
-#include <vector>
 #include <set>
+#include <string>
 
 using namespace std;
 
@@ -34,8 +35,11 @@ namespace StreamSearch
 
 		/// <summary>
 		/// Owned collection of child nodes.
+		/// For the sake of maximum performance either all child nodes are allocated or none are.
+		/// If the pointer to the child nodes is null, it means that this search node has no child nodes.
+		/// Otherwise, if this search node has at least one child node, then all child nodes are allocated and the ones not used are null.
 		/// </summary>
-		vector<unique_ptr<SearchNode>> children;
+		unique_ptr<array<unique_ptr<SearchNode>, UCHAR_MAX + 1>> children;
 
 		/// <summary>
 		/// Is this search node a search term terminator?

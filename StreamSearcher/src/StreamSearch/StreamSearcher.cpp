@@ -4,8 +4,9 @@
 
 #include <algorithm>
 #include <assert.h>
-#include <sstream>
 #include <memory>
+#include <sstream>
+#include <vector>
 
 using namespace InputDataHandling;
 using namespace Logging;
@@ -149,7 +150,7 @@ void StreamSearcher::SearchStream(istream& inputStream)
 					}
 				),
 				end(activeSearchNodePtrs)
-						);
+			);
 		}
 	);
 }
