@@ -8,6 +8,9 @@
 #include "../src/Utils/Timer.h"
 
 #include <fstream>
+#include <set>
+#include <sstream>
+#include <string>
 
 using namespace InputArgumentsHandling;
 using namespace Logging;

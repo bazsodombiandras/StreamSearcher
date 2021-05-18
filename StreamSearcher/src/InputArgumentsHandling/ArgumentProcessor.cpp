@@ -3,6 +3,7 @@
 
 #include <filesystem>
 #include <stdexcept>
+#include <sstream>
 #include <string>
 
 using namespace InputArgumentsHandling;
